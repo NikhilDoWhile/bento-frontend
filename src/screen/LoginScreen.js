@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { StyleSheet, View, Text, Image, TextComponent } from 'react-native'
+import { View, Text, Image, TextComponent } from 'react-native'
 import ButtonComponent from '../components/ButtomComponent'
 import ImageComponent from '../components/ImageComponent'
 import TextInputComponent from '../components/TextInputComponent'
+// add styling below
 
 const LoginScreen = ({ navigation }) => {
     const [singUp, setSingUp] = useState(false)
@@ -12,19 +13,22 @@ const LoginScreen = ({ navigation }) => {
     const moveTomainScreen = () => {
         navigation.navigate('welcome')
     }
+
     return (
-        <View style={styles.container}>
-            <View style={{ alignSelf: 'center', backgroundColor: 'red' }}>
-                <ImageComponent />
+        <View style={[loginStyle.Logincontainer]}>
+            <View style={[loginStyle.loginImageView]}>
+                <ImageComponent
+                    source={'https://previews.123rf.com/images/tanyastock/tanyastock1803/tanyastock180300490/97923644-user-icon-avatar-login-sign-circle-button-with-soft-color-gradient-background-vector-.jpg'}
+                />
             </View>
-            <View style={{ justifyContent: 'center' }}>
+            <View style={[loginStyle.textInputView]}>
                 {
                     singUp &&
                     <View style={{ margin: 7 }}>
                         <Text style={{ margin: 3 }}>Name</Text>
                         <TextInputComponent
                             placeholder={"User name"}
-                            inputStyle={{ borderRadius: 10 }}
+                            inputStyle={loginStyle.inputStyle}
                         />
                     </View>
                 }
@@ -32,14 +36,14 @@ const LoginScreen = ({ navigation }) => {
                     <Text style={{ margin: 3 }}>Email</Text>
                     <TextInputComponent
                         placeholder={"name@email.com"}
-                        inputStyle={{ borderRadius: 10 }}
+                        inputStyle={loginStyle.inputStyle}
                     />
                 </View>
                 <View style={{ margin: 7 }}>
                     <Text style={{ margin: 3 }}>Password</Text>
                     <TextInputComponent
                         placeholder={"********"}
-                        inputStyle={{ borderRadius: 10 }}
+                        inputStyle={loginStyle.inputStyle}
                     />
                 </View>
                 {
@@ -48,7 +52,7 @@ const LoginScreen = ({ navigation }) => {
                         <Text style={{ margin: 3 }}>Confirm Password</Text>
                         <TextInputComponent
                             placeholder={"********"}
-                            inputStyle={{ borderRadius: 10 }}
+                            inputStyle={loginStyle.inputStyle}
                         />
                     </View>
                 }
@@ -58,22 +62,14 @@ const LoginScreen = ({ navigation }) => {
                     text={!singUp ? "LOGIN" : "SINGUP"}
                     onPress={() => moveTomainScreen()}
                 />
-                <View style={{ marginTop: 10, height: 50, alignItems: 'center', justifyContent: 'space-between' }}>
-                    <Text style={{ alignSelf: 'center', color: 'gray' }}>{!singUp ? "Don't have and account" : "Already have an account"} ?<Text onPress={() => singUpData()} style={{ color: 'blue' }}>{!singUp ? " Sing in" : " Login"}</Text></Text>
+                <View style={[loginStyle.loginButton]}>
+                    <Text style={[loginStyle.loginSingInSingUpText]}>{!singUp ? "Don't have and account" : "Already have an account"} ?<Text onPress={() => singUpData()} style={[loginStyle.singUpColor]}>{!singUp ? " Sing in" : " Login"}</Text></Text>
                     {
-                        !singUp && <Text style={{ alignSelf: 'center', color: 'gray' }}>Forget Password</Text>
+                        !singUp && <Text style={[loginStyle.forgotPassword]}>Forget Password</Text>
                     }
                 </View>
             </View>
         </View>
     )
 }
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        //backgroundColor: 'red'
-        justifyContent: 'space-evenly'
-    }
-
-})
 export default LoginScreen

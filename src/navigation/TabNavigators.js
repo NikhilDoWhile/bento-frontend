@@ -5,7 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import HomeScreen from '../screen/HomeScreen';
 
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator()
 const TabNavigators = () => {
     return (
         <Tab.Navigator

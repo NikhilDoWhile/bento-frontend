@@ -4,6 +4,7 @@ import ButtonComponent from '../components/ButtomComponent'
 import ImageComponent from '../components/ImageComponent'
 import TextInputComponent from '../components/TextInputComponent'
 // add styling below
+import { loginStyle } from '../style/LoginStyle'
 
 const LoginScreen = ({ navigation }) => {
     const [singUp, setSingUp] = useState(false)

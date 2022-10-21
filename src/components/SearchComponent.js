@@ -1,16 +1,19 @@
 import React from 'react'
-import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity, Image, Dimensions } from 'react-native'
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import TextInputComponent from './TextInputComponent';
+const screenWidth = Dimensions.get('window').width
 
-const SearchComponent = ({ onPress, movieSelection }) => {
+const SearchComponent = ({ onPress, movieSelection, onChangeText, value }) => {
     return (
-        <TouchableOpacity onPress={onPress} style={[styles.container,]}>
+        <TouchableOpacity onPress={onPress} style={[styles.container]}>
             <EvilIcons size={26} color="gray" name="search" style={{ left: 10 }} />
             <TextInputComponent
-                inputStyle={{ width: '90%', borderWidth: 0 }}
+                inputStyle={{ width: '90%', borderWidth: 0, width: screenWidth / 1.3, }}
                 placeholder={'search'}
+                onChangeText={onChangeText}
+                value={value}
             />
             {/* <AntDesign size={20} color="black" name="down" /> */}
         </TouchableOpacity>

@@ -1,12 +1,14 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
+const screenHeight = Dimensions.get('window').height
 
 export const loginStyle = StyleSheet.create({
     Logincontainer: {
         flex: 1,
-        justifyContent: 'space-evenly'
     },
     loginImageView: {
-        alignSelf: 'center',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: screenHeight / 3,
     },
     loginButton: {
         marginTop: 10,
@@ -28,6 +30,16 @@ export const loginStyle = StyleSheet.create({
     inputStyle: {
         borderRadius: 10
     },
-    textInputView: { justifyContent: 'center' }
+    textInputView: {
+        justifyContent: 'space-between'
+    },
+    inputViewStyle: {
+        borderWidth: 0.9,
+        borderColor: 'gray',
+        justifyContent: 'space-around',
+        flexDirection: 'row',
+        alignItems: 'center',
+        borderRadius: 10
+    }
 })
 

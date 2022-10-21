@@ -1,44 +1,71 @@
-import React from 'react'
-import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native'
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import ImageComponent from './ImageComponent';
+import React, { useState } from 'react'
+import { Dimensions, StyleSheet, TouchableOpacity, View, Text, ScrollView } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import ButtonComponent from '../components/ButtomComponent'
+import Header from '../components/Header'
+const screenHeight = Dimensions.get('window').height
+const screenWidth = Dimensions.get('window').width
 
-const ButtonComponent = ({ text, buttonStyle, textStyle, showLine, onPress, showArrow, showImage }) => {
+const HomeScreen = ({ navigation }) => {
+    const [toggleButton, setToggleButton] = useState(false)
+    const toggleDataMatche = () => {
+        setToggleButton(false)
+    }
+    const toggleDataOtherRecipe = () => {
+        setToggleButton(true)
+    }
+
     return (
-        <TouchableOpacity onPress={onPress} style={[styles.container, buttonStyle]}>
-            {
-                showArrow ? <AntDesign size={20} color="white" name="arrowright" /> : <Text style={[styles.textStyles, textStyle]}>{text}</Text>
-            }
-            {
-                showLine ? <View style={{ width: 420, height: 1, backgroundColor: 'red', bottom: 9 }} /> : null
-            }
-            {
-                showImage ?
-                    <View style={{ height: 40, bottom: 6, justifyContent: 'center', alignItems: 'center' }}>
-                        <ImageComponent
-                            source={'https://blog.hubspot.com/hubfs/image8-2.jpg'}
-                            imageStyle={{ height: 20, width: 20, }}
-                        />
-                    </View>
-                    :
-                    null
-            }
-        </TouchableOpacity>
+        <SafeAreaView style={styles.container}>
+            <Header logo />
+            <View style={{ flex: 1 }}>
+                <View style={styles.homeScreenButton}>
+                    <TouchableOpacity onPress={() => toggleDataMatche()} style={[styles.matchButton, { backgroundColor: toggleButton ? "#F6F3E7" : '#FC6474', borderTopLeftRadius: 10, borderBottomLeftRadius: 10 }]}>
+                        <Text style={[styles.text, { color: !toggleButton ? 'white' : "black" }]}>Recipe Match</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => toggleDataOtherRecipe()} style={[styles.matchButton, { backgroundColor: toggleButton ? "#FC6474" : '#F6F3E7', borderTopRightRadius: 10, borderBottomRightRadius: 10 }]}>
+                        <Text style={[styles.text, { color: !toggleButton ? 'black' : "white" }]}>Other Recipe</Text>
+                    </TouchableOpacity>
+                </View>
+
+                <View style={styles.mainContainer}>
+                    <ButtonComponent
+                        text={'update pantry'}
+                        buttonStyle={{ width: 200, alignSelf: 'center', borrderRadius: 20, position: 'absolute', top: 530 }} />
+                </View>
+            </View>
+        </SafeAreaView>
     )
 }
 const styles = StyleSheet.create({
     container: {
-        height: 40,
-        margin: 10,
-        padding: 10,
-        backgroundColor: '#FFAB00',
-        borderRadius: 7,
-        justifyContent: 'center',
-        alignItems: 'center',
-        // color: 'white'
+        flex: 1,
+        backgroundColor: 'white',
+        // marginTop: 10
     },
-    textStyles: {
-        color: 'white'
+    homeScreenButton: {
+        height: screenHeight / 22,
+        //backgroundColor: 'red',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignSelf: 'center',
+        borderRadius: 10,
+        // top: 5
+        marginTop: 10
+    },
+    matchButton: {
+        width: screenWidth / 2.2,
+        //borderBottomEndRadius: 10
+        // backgroundColor: 'gray',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    mainContainer: {
+        flex: 1,
+        marginTop: 1
+
+
     }
-});
-export default ButtonComponent
+
+})
+export default HomeScreen

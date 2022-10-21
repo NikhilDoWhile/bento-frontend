@@ -3,6 +3,8 @@ import { Dimensions, StyleSheet, TouchableOpacity, View, Text, ScrollView } from
 import { SafeAreaView } from 'react-native-safe-area-context'
 import ButtonComponent from '../components/ButtomComponent'
 import Header from '../components/Header'
+import NonMatchRecipeText from '../components/homeScreenComponent/NonMatchRecipeText'
+import RecipeComponent from '../components/homeScreenComponent/RecipeComponent'
 const screenHeight = Dimensions.get('window').height
 const screenWidth = Dimensions.get('window').width
 
@@ -29,6 +31,9 @@ const HomeScreen = ({ navigation }) => {
                 </View>
 
                 <View style={styles.mainContainer}>
+                    {
+                        !toggleButton ? <NonMatchRecipeText /> : <RecipeComponent navigation={navigation} />
+                    }
                     <ButtonComponent
                         text={'update pantry'}
                         buttonStyle={{ width: 200, alignSelf: 'center', borrderRadius: 20, position: 'absolute', top: 530 }} />

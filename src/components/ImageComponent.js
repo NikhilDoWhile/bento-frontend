@@ -2,11 +2,11 @@ import React from "react";
 import { StyleSheet, View, Text, TextInput, Image } from "react-native";
 
 
-const ImageComponent = ({ placeholder, onChangeText, value, inputStyle, keyboardType, maxLength, editable }) => {
+const ImageComponent = ({ placeholder, onChangeText, value, inputStyle, keyboardType, maxLength, editable, source, imageStyle }) => {
     return (
         <Image
-            source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYqA39Tbi6MqO6MJogGZCTsbHwch-C3FD3KPvjqbo&s' }}
-            style={[styles.imageContainer]}
+            source={{ uri: source }}
+            style={[styles.imageContainer, imageStyle]}
         />
     )
 }

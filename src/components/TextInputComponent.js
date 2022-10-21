@@ -1,28 +1,32 @@
 import React from "react";
-import { StyleSheet, View, Text, TextInput } from "react-native";
+import { StyleSheet, View, Text, TextInput, Dimensions } from "react-native";
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+const screenWidth = Dimensions.get('window').width
 
 
-const TextInputComponent = ({ placeholder, onChangeText, value, inputStyle, keyboardType, maxLength, editable }) => {
+
+const TextInputComponent = ({ placeholder, onChangeText, value, inputStyle, keyboardType, maxLength, editable, symbol, icon, inputContainer }) => {
     return (
-        <TextInput
-            style={[styles.input, inputStyle]}
-            onChangeText={onChangeText}
-            value={value}
-            placeholder={placeholder}
-            keyboardType={keyboardType}
-            maxLength={maxLength}
-            placeholderTextColor={'#999999'}
-            editable={editable}
-        />
+        <View style={[styles.inputContainer, inputContainer]}>
+            {icon ? <MaterialIcons size={20} color="gray" name={symbol} /> : null}
+            <TextInput
+                style={[styles.input, inputStyle]}
+                onChangeText={onChangeText}
+                value={value}
+                placeholder={placeholder}
+                keyboardType={keyboardType}
+                maxLength={maxLength}
+                placeholderTextColor={'#999999'}
+                editable={editable}
+            />
+        </View>
     )
 }
 const styles = StyleSheet.create({
     input: {
-        //margin: 10,
-        borderWidth: 0.9,
         padding: 10,
-        borderColor: 'gray',
         height: 40,
+        width: screenWidth / 1.2
     },
 
 })

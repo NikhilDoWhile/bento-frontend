@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 export const welcomeStyle = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: 'white'
     },
     ImageView: {
         alignSelf: 'center',
@@ -11,7 +12,7 @@ export const welcomeStyle = StyleSheet.create({
     },
     welcomeButtonStyle:
     {
-        width: 50,
+        width: 70,
         borderRadius: 20,
         alignSelf: 'center'
     },
@@ -20,12 +21,13 @@ export const welcomeStyle = StyleSheet.create({
     },
     welcomeView: {
         flex: 1,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        backgroundColor: 'white'
     },
     textView: {
         flex: 0.9,
-        backgroundColor: 'lightgray',
-        justifyContent: 'center'
+        backgroundColor: 'white',
+        justifyContent: 'space-between'
     }
 
 })

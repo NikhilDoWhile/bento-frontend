@@ -6,6 +6,7 @@ import WelcomeScreen from '../screen/WelcomeScreen';
 import TabNavigators from './TabNavigators';
 import PantryScreen from '../screen/PantryScreen';
 import RecipeDetails from '../screen/RecipeDetails';
+import HomeScreen from '../screen/HomeScreen';
 
 
 const StackNavigators = () => {

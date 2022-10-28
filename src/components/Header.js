@@ -4,13 +4,17 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 
-const Header = ({ logo, onBackPress }) => {
+const Header = ({ logo, onBackPress, headerTitle, showHeaderTitle }) => {
 
     return (
         <View style={styles.container}>
             {
                 logo ? <Text style={{ fontSize: 20 }}>L O G O</Text> : <AntDesign onPress={onBackPress} size={20} color="gray" name="arrowleft" />
             }
+            {
+                showHeaderTitle ? <Text style={{ fontSize: 17, fontWeight: '900' }}>{headerTitle}</Text> : null
+            }
+
 
             <View style={{ flexDirection: 'row', width: 50, justifyContent: 'space-between' }}>
                 <Feather size={22} color="gray" name="user" />

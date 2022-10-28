@@ -42,7 +42,7 @@ const RecipeDetails = ({ route, navigation }) => {
                     <ButtonComponent
                         buttonStyle={{ width: 200, borderRadius: 20, alignSelf: 'center' }}
                         text={'Add To lunch'}
-                        onPress={() => navigation.navigate("AddToLunchBox")}
+                        onPress={() => navigation.navigate("AddToLunchBox", { recipeData: route.params })}
                     />
                 </View>
             </ScrollView>

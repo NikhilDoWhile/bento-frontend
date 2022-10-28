@@ -20,7 +20,7 @@ const LoginScreen = ({ navigation }) => {
 
     const moveTomainScreen = () => {
         let data = {
-            userName: 'shivamkmr057@gmail.com',
+            userName: 'user@gmail.com',
             password: '1234',
         }
 

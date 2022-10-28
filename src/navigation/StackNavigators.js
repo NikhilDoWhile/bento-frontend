@@ -7,6 +7,7 @@ import TabNavigators from './TabNavigators';
 import PantryScreen from '../screen/PantryScreen';
 import RecipeDetails from '../screen/RecipeDetails';
 import HomeScreen from '../screen/HomeScreen';
+import AddToLunchBox from '../screen/AddToLunchBox';
 
 
 const StackNavigators = () => {
@@ -27,6 +28,7 @@ const StackNavigators = () => {
                 <Stack.Screen name="Pantry" component={PantryScreen} />
                 <Stack.Screen name="TabNavigators" component={TabNavigators} />
                 <Stack.Screen name="RecipeDetails" component={RecipeDetails} />
+                <Stack.Screen name="AddToLunchBox" component={AddToLunchBox} />
             </Stack.Navigator>
         </NavigationContainer>
 

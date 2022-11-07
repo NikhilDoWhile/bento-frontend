@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, Image, TextComponent, ScrollView, Dimensions } from 'react-native'
+import { View, Text, Image, TextComponent, ScrollView, Dimensions, Alert } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import ApiHandler from '../api/ApiHandler'
 import ButtonComponent from '../components/ButtomComponent'
 import ImageComponent from '../components/ImageComponent'
 import TextInputComponent from '../components/TextInputComponent'
-// add styling below
 import { loginStyle } from '../style/LoginStyle'
 const screenHeight = Dimensions.get('window').height
 const screenWidth = Dimensions.get('window').width
@@ -12,20 +12,31 @@ const screenWidth = Dimensions.get('window').width
 
 const LoginScreen = ({ navigation }) => {
     const [singUp, setSingUp] = useState(false)
-
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [userName, setUserName] = useState('')
 
     const singUpData = () => {
         setSingUp(!singUp)
     }
 
-    const moveTomainScreen = () => {
-        let data = {
-            userName: 'user@gmail.com',
-            password: '1234',
-        }
-
-        //getRestApi(`${baseUrl.login}userName=${data.userName}&password=${data.password}`)
-        navigation.navigate('welcome')
+    const moveTomainScreen = async (email, password) => {
+        ApiHandler.login(email, password).then((response) => {
+            if (response === 200) {
+                navigation.navigate('welcome',{userName:email})
+            } else {
+                Alert.alert(`LoginUser is not present:${email}`)
+            }
+        })
+    }
+    const moveToSingUp = (password, userName, email) => {
+        ApiHandler.singUp(password, userName, email).then((response) => {
+            if (response === true) {
+                navigation.navigate('welcome')
+            } else {
+                console.log("error====")
+            }
+        })
     }
 
     return (
@@ -43,8 +54,9 @@ const LoginScreen = ({ navigation }) => {
                             <Text style={{ margin: 3, fontWeight: '600' }}>NAME</Text>
                             <TextInputComponent
                                 placeholder={"User name"}
-
                                 inputStyle={[loginStyle.inputStyle, { borderWidth: 0.9, width: screenWidth / 1.04, borderColor: 'gray' }]}
+                                value={userName}
+                                onChangeText={(text) => setUserName(text)}
                             />
                         </View>
                     }
@@ -54,6 +66,8 @@ const LoginScreen = ({ navigation }) => {
                             <TextInputComponent
                                 placeholder={"name@email.com"}
                                 symbol="email"
+                                value={email}
+                                onChangeText={(text) => setEmail(text)}
                                 inputStyle={loginStyle.inputStyle}
                                 icon
                                 inputContainer={loginStyle.inputViewStyle}
@@ -65,6 +79,8 @@ const LoginScreen = ({ navigation }) => {
                                 placeholder={"********"}
                                 inputStyle={loginStyle.inputStyle}
                                 symbol={'lock'}
+                                value={password}
+                                onChangeText={(text) => setPassword(text)}
                                 icon
                                 inputContainer={loginStyle.inputViewStyle}
                             />
@@ -86,11 +102,14 @@ const LoginScreen = ({ navigation }) => {
                         {
                             !singUp && <Text style={[loginStyle.forgotPassword, { alignSelf: 'flex-end', right: 10, }]}>Forget Password</Text>
                         }
+                        {
+                            console.log("singup=====", !singUp)
+                        }
 
                         <ButtonComponent
                             buttonStyle={{ borderRadius: 30, backgroundColor: '#FFAB00' }}
                             text={!singUp ? "LOGIN" : "SIGN UP"}
-                            onPress={() => moveTomainScreen()}
+                            onPress={() => !singUp ? moveTomainScreen(email, password) : moveToSingUp(password, userName, email)}
                         />
                         <View style={{ padding: 10 }}>
                             <Text style={[loginStyle.forgotPassword]}>{!singUp ? "Or login with" : "or sign with"}</Text>

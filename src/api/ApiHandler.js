@@ -84,4 +84,30 @@ export default class ApiHandler {
             console.log("removeShoppingList",e);
         }
     }
+    static addLunchBox = async (parentId,day) => {
+        console.log("day========",day)
+        try {
+            const params = {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+            }
+            const fetchResponse = await fetch(baseUrl.addLunchBox + `parentId=${parentId}&day=${day}`, params);
+            return fetchResponse
+             
+        } catch (e) {
+            console.log("addLunchBox==", e)
+        }
+    }
+    static getLunchBox =async (parentId) =>{
+        try {
+            let fetchResponse= await fetch (baseUrl.getLunchBox+parentId)
+            let data=fetchResponse.json()
+            return data;
+        } catch (e){
+            console.log("getShoppingList",e)
+        }
+    }
 }

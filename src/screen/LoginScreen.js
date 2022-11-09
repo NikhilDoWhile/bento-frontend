@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, } from 'react'
 import { View, Text, Image, TextComponent, ScrollView, Dimensions, Alert } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import ApiHandler from '../api/ApiHandler'
@@ -8,6 +8,8 @@ import TextInputComponent from '../components/TextInputComponent'
 import { loginStyle } from '../style/LoginStyle'
 const screenHeight = Dimensions.get('window').height
 const screenWidth = Dimensions.get('window').width
+import PropTypes from 'prop-types'
+//import { GoogleSignin, statusCodes,GoogleSigninButton } from '@react-native-google-signin/google-signin';
 
 
 const LoginScreen = ({ navigation }) => {
@@ -15,6 +17,15 @@ const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [userName, setUserName] = useState('')
+    const [userGoogleInfo,setUserGoogleInfo]=useState({})
+    const [loaded,setLoaded] = useState(false)
+
+//    useEffect(()=>{
+//     GoogleSignin.configure({
+//         webClientId: "236411888952-ggjlkq9bi5efid178ej8dnu0ek2jq86a.apps.googleusercontent.com", 
+//         offlineAccess: true
+//       });
+//    },[])
 
     const singUpData = () => {
         setSingUp(!singUp)
@@ -28,6 +39,9 @@ const LoginScreen = ({ navigation }) => {
                 Alert.alert(`LoginUser is not present:${email}`)
             }
         })
+    }
+    const googleSingIn = ()=>{
+
     }
     const moveToSingUp = (password, userName, email) => {
         ApiHandler.singUp(password, userName, email).then((response) => {

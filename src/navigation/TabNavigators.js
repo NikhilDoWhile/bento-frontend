@@ -15,10 +15,6 @@ const TabNavigators = () => {
         <Tab.Navigator
             initialRouteName='Home'
             screenOptions={{ headerShown: false }}
-        // tabBarOptions={{
-        //     activeTintColor: 'gray',
-        //     inactiveTintColor: 'black',
-        // }}
         >
             <Tab.Screen
                 name="Home"
@@ -57,9 +53,7 @@ const TabNavigators = () => {
                         <AntDesign size={20} color="black" name="staro" />
                     )
                 }}
-
             />
-
         </Tab.Navigator>
     );
 }

@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Dimensions, StyleSheet, TouchableOpacity, View, Text, ScrollView } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import ApiHandler from '../api/ApiHandler'
 import ButtonComponent from '../components/ButtomComponent'
 import Header from '../components/Header'
 import NonMatchRecipeText from '../components/homeScreenComponent/NonMatchRecipeText'
@@ -8,18 +9,23 @@ import RecipeComponent from '../components/homeScreenComponent/RecipeComponent'
 const screenHeight = Dimensions.get('window').height
 const screenWidth = Dimensions.get('window').width
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = ({ navigation, route }) => {
+    console.log("homeScreen===", route)
+
     const [toggleButton, setToggleButton] = useState(false)
+    // const [flag,setFla]
+
     const toggleDataMatche = () => {
         setToggleButton(false)
     }
+
     const toggleDataOtherRecipe = () => {
         setToggleButton(true)
     }
 
     return (
         <SafeAreaView style={styles.container}>
-            <Header logo />
+            <Header logo onUserPress={() => navigation.navigate('ProfileScreen')} />
             <View style={{ flex: 1 }}>
                 <View style={styles.homeScreenButton}>
                     <TouchableOpacity onPress={() => toggleDataMatche()} style={[styles.matchButton, { backgroundColor: toggleButton ? "#F6F3E7" : '#FC6474', borderTopLeftRadius: 10, borderBottomLeftRadius: 10 }]}>
@@ -32,10 +38,13 @@ const HomeScreen = ({ navigation }) => {
 
                 <View style={styles.mainContainer}>
                     {
-                        !toggleButton ? <NonMatchRecipeText /> : <RecipeComponent navigation={navigation} />
+                        !toggleButton ? route.params.response.matchedRecipe.length > 0 ? <RecipeComponent flag={'flag'} data={route.params.response.matchedRecipe} navigation={navigation} selectedIngredients={route.params.selectedIngredients} /> : <NonMatchRecipeText /> : <RecipeComponent data={route.params.response.unMatchedRecipe} navigation={navigation} selectedIngredients={route.params.selectedIngredients} />
                     }
                     <ButtonComponent
                         text={'update pantry'}
+                        onPress={() => navigation.navigate('TabNavigators', {
+                            screen: 'ShoppingList'
+                        })}
                         buttonStyle={{ width: 200, alignSelf: 'center', borrderRadius: 20, position: 'absolute', top: 530 }} />
                 </View>
             </View>
@@ -46,30 +55,23 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white',
-        // marginTop: 10
     },
     homeScreenButton: {
         height: screenHeight / 22,
-        //backgroundColor: 'red',
         flexDirection: 'row',
         justifyContent: 'center',
         alignSelf: 'center',
         borderRadius: 10,
-        // top: 5
         marginTop: 10
     },
     matchButton: {
         width: screenWidth / 2.2,
-        //borderBottomEndRadius: 10
-        // backgroundColor: 'gray',
         justifyContent: 'center',
         alignItems: 'center'
     },
     mainContainer: {
         flex: 1,
-        marginTop: 1
-
-
+        marginTop: 1,
     }
 
 })

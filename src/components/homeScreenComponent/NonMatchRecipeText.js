@@ -5,7 +5,7 @@ const NonMatchRecipeText = () => {
     return (
         <View style={styles.container}>
             <View style={{ margin: 20 }}>
-                <Text style={{ fontSize: 25, alignSelf: 'center' }}>Oopies!</Text>
+                <Text style={{ fontSize: 25, alignSelf: 'center' }}>Opies!</Text>
                 <Text style={styles.textStyle}>it looks like none of our recipes match your ingredients</Text>
                 <Text style={styles.textStyle}>Try clicking your pantry by clicking on "update pantry" button</Text>
                 <Text style={styles.textStyle}>on checkout the "other recipe" tab for other suggestions</Text>

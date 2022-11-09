@@ -18,6 +18,7 @@ const TextInputComponent = ({ placeholder, onChangeText, value, inputStyle, keyb
                 maxLength={maxLength}
                 placeholderTextColor={'#999999'}
                 editable={editable}
+                autoCapitalize='none'
             />
         </View>
     )

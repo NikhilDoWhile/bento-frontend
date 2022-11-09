@@ -8,7 +8,7 @@ import { welcomeStyle } from '../style/WelcomeStyle'
 const screenHeight = Dimensions.get('window').height
 const screenWidth = Dimensions.get('window').width
 
-const WelcomeScreen = ({ navigation }) => {
+const WelcomeScreen = ({ navigation,route }) => {
 
     return (
         <SafeAreaView style={[welcomeStyle.container]}>
@@ -21,7 +21,7 @@ const WelcomeScreen = ({ navigation }) => {
                             imageStyle={{ width: screenWidth, height: screenHeight / 2, borderRadius: 20 }}
                         />
                         <View style={{ height: screenHeight / 2, justifyContent: 'space-evenly', alignItems: 'center' }}>
-                            <Text style={{ color: '#FFAB00', fontSize: 25, alignSelf: 'center' }}>Welcome UserName!</Text>
+                            <Text style={{ color: '#FFAB00', fontSize: 25, alignSelf: 'center' }}>Welcome {route?.params?.userName}</Text>
                             <Text style={{ fontSize: 16 }}>Would you like to know what is your pantry based on which you can suggest you the recipes</Text>
                             <Text style={{ fontSize: 16 }}>Also let us know about your kids</Text>
                             {/* <View style={[welcomeStyle.forwardArrowView]}>

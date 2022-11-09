@@ -7,7 +7,8 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import ApiHandler from "../api/ApiHandler";
 
 const AddToLunchBox = ({ navigation, route }) => {
-    // console.log("route===", route.params.recipeData.ingridientsName)
+    console.log("route===", route.params.recipeData.ingridientsName
+    )
     const List = [
         { id: 1, day: 'sunday' },
         { id: 2, day: 'Monday' },
@@ -21,7 +22,9 @@ const AddToLunchBox = ({ navigation, route }) => {
     const [days, setDays] = useState(List)
     const [arrData, setArrData] = useState([]);
     const [dayArray, setDayArray] = useState([])
+    const [dayData, setDayData] = useState([])
     const [msg, setMsg] = useState([]);
+    const [dayString, setDayString] = useState()
     const handlePress = (item, index) => {
         const check = [...arrData];
         //const select = [...arrData];
@@ -44,20 +47,35 @@ const AddToLunchBox = ({ navigation, route }) => {
         setArrData(check);
 
     };
+
     const NavigateToLunchBoxScreen = (msg) => {
-        if (msg !== []) {
-            navigation.navigate('TabNavigators', {
-                screen: 'LunchBox',
-                params: { message: msg, flag: true }
-            })
-        } else {
-            Alert.alert('please select Day')
-        }
+        const day = [...dayData]
+        msg.map((element) => {
+            day.push(element.day)
+            let DayInString = day.toString();
+            setDayString(DayInString)
+            setDayData(day)
+            if (msg !== []) {
+                let parentId = route.params.recipeData.id
+                ApiHandler.addLunchBox(parentId, DayInString).then((response) => {
+                    console.log("add Luchbox===", response, DayInString)
+                    if (response.status === 200) {
+                        navigation.navigate('TabNavigators', {
+                            screen: 'LunchBox',
+                            params: { message: msg, flag: true, parentId: route.params.recipeData.id, recipeImage: route.params.recipeData.ingridientsImage, ingridientsName: route.params.recipeData.ingridientsName }
+                        })
+                    }
+                })
+            } else {
+                Alert.alert('please select Day')
+            }
+        })
     }
     return (
         <SafeAreaView style={styles.lunchBoxContainer}>
             <Header
                 onBackPress={() => navigation.pop()}
+                onUserPress={() => navigation.navigate('ProfileScreen')}
             />
             <View style={{ flex: 1 / 5, justifyContent: 'center', alignItems: 'center' }}>
                 <Text style={{ fontSize: 20, fontWeight: '700' }}>Add to LunchBox</Text>
@@ -82,7 +100,7 @@ const AddToLunchBox = ({ navigation, route }) => {
                 </View>
 
             </View>
-            <View style={{ flex: 1 / 10, alignItems: 'center' }}>
+            <View style={{ flex: 1 / 10, alignItems: 'center' }} p>
                 <ButtonComponent
                     buttonStyle={{ width: 100, borderRadius: 20 }}
                     text={'Save'}

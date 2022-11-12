@@ -25,7 +25,7 @@ const ShoppingListScreen = ({navigation}) => {
     const [msg, setMsg] = useState([]);
     useEffect(()=>{
        getShoppingListData()
-    },[])
+    },[shoppingData])
 
     const getShoppingListData = ()=>{
         ApiHandler.getShoppingList().then((response)=>{

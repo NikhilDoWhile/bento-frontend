@@ -5,9 +5,9 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import TextInputComponent from './TextInputComponent';
 const screenWidth = Dimensions.get('window').width
 
-const SearchComponent = ({ onPress, movieSelection, onChangeText, value }) => {
+const SearchComponent = ({ onPress, movieSelection, onChangeText, value, searchStyle }) => {
     return (
-        <TouchableOpacity onPress={onPress} style={[styles.container]}>
+        <TouchableOpacity onPress={onPress} style={[styles.container, searchStyle]}>
             <EvilIcons size={26} color="gray" name="search" style={{ left: 10 }} />
             <TextInputComponent
                 inputStyle={{ width: '90%', borderWidth: 0, width: screenWidth / 1.3, }}

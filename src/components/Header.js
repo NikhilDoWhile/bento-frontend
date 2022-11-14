@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 
-const Header = ({ logo, onBackPress, headerTitle, showHeaderTitle }) => {
+const Header = ({ logo, onBackPress, headerTitle, showHeaderTitle,onUserPress }) => {
 
     return (
         <View style={styles.container}>
@@ -17,7 +17,7 @@ const Header = ({ logo, onBackPress, headerTitle, showHeaderTitle }) => {
 
 
             <View style={{ flexDirection: 'row', width: 50, justifyContent: 'space-between' }}>
-                <Feather size={22} color="gray" name="user" />
+                <Feather onPress={onUserPress} size={22} color="gray" name="user" />
                 <AntDesign size={20} color="gray" name="bells" />
             </View>
         </View>

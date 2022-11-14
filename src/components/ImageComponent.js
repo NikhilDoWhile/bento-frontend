@@ -5,7 +5,7 @@ import { StyleSheet, View, Text, TextInput, Image } from "react-native";
 const ImageComponent = ({ placeholder, onChangeText, value, inputStyle, keyboardType, maxLength, editable, source, imageStyle }) => {
     return (
         <Image
-            source={{ uri: source }}
+            source={{uri:source}}
             style={[styles.imageContainer, imageStyle]}
         />
     )

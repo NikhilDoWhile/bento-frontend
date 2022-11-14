@@ -12,30 +12,24 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import ApiHandler from '../api/ApiHandler'
 
 const LunchBoxScreen = ({ route, navigation }) => {
-    // console.log("lunchBox=====",route.params)
     const list = [
         { id: 1, name: 'bella', checked: 'false' },
         { id: 2, name: 'jenna', clecked: 'false' }
     ]
-    const [data, setData] = useState([])
+    const [data, setData] = useState(route?.params?.day)
     const [flag, setFlag] = useState(false)
     const [modalVisible, setModalVisible] = useState(false);
     const [select, setSelect] = useState(true)
-    const [nameData, setnameData] = useState(list)
+    const [nameData, setnameData] = useState(route?.params?.kid)
+
     useEffect(() => {
         setFlag(route?.params?.flag)
-        getLunchBox()
+
     }, [])
     const modalPopUp = () => {
         setModalVisible(!modalVisible)
     }
-    const getLunchBox = ()=>{
-        ApiHandler.getLunchBox(route?.params?.parentId).then((response)=>{
-           if(response) {
-              setData(response.day.day)
-           }
-        })
-    }
+
     const showButton = (value, index) => {
         const newValue = nameData.map((checkbox, i) => {
             if (i !== index)
@@ -59,13 +53,14 @@ const LunchBoxScreen = ({ route, navigation }) => {
         newArray.splice(id, 1)
         setData(newArray)
     }
-    const renderItem = ({ item,index }) => {
+    const renderItem = ({ item, index }) => {
+
         return (
             <TouchableOpacity onPress={() => modalPopUp()} style={{ width: '100%', height: screenHeight / 3.5, backgroundColor: 'white', marginTop: 10, justifyContent: 'space-evenly', }}>
-                <Text style={{ fontSize: 20, marginLeft: 22 }}>{item}</Text>
+                <Text style={{ fontSize: 20, marginLeft: 22 }}>{item.day}</Text>
                 <View style={{ width: screenWidth / 1.14, height: screenHeight / 4.5, backgroundColor: '#F6F3E7', alignSelf: 'center', borderRadius: 10 }}>
                     <ImageBackground
-                        source={{ uri: route.params.recipeImage }}
+                        source={{ uri: item.recipeImage }}
                         style={{ flex: 7 / 8, borderTopLeftRadius: 10, borderTopRightRadius: 10 }}
                     >
                         <TouchableOpacity onPress={() => removeData(index)} style={{ backgroundColor: 'white', width: 40, alignSelf: 'flex-end', justifyContent: 'center', alignItems: 'center' }}>
@@ -73,9 +68,9 @@ const LunchBoxScreen = ({ route, navigation }) => {
                         </TouchableOpacity>
                     </ImageBackground>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', flex: 2 / 8, alignItems: 'center', paddingHorizontal: 10 }}>
-                        <Text>{route.params.ingridientsName}</Text>
+                        <Text>{item.recipeName}</Text>
                         <View>
-                        <Feather size={22} color="gray" name="user" />
+                            <Feather size={22} color="gray" name="user" />
                         </View>
                     </View>
                 </View>
@@ -128,14 +123,15 @@ const LunchBoxScreen = ({ route, navigation }) => {
             <Header
                 showHeaderTitle
                 headerTitle="Lunch Box"
-                onUserPress={()=>navigation.navigate('ProfileScreen')}
+                onUserPress={() => navigation.navigate('ProfileScreen')}
+                onBackPress={() => navigation.pop()}
             />
             {
                 flag ?
                     <View>
                         <FlatList
-                            data={data}
-                           // keyExtractor={(item) => item.id}
+                            data={route?.params?.message}
+                            keyExtractor={(item) => item.id}
                             renderItem={renderItem}
                         />
                     </View>

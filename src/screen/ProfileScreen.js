@@ -30,7 +30,7 @@ const ProfileScreen  = ({navigation})=>{
     }
     return (
         <SafeAreaView style={styles.container}>
-            <Header/>
+            <Header onBackPress={()=>navigation.pop()}/>
              <View style={{flex:1,}}>
                 <View style={{height:30,width:'100%',justifyContent:'center',margin:20}}>
                     <Text style={{fontSize:20}}>Profile</Text>

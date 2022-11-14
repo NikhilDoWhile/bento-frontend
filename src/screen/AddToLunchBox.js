@@ -7,10 +7,10 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import ApiHandler from "../api/ApiHandler";
 
 const AddToLunchBox = ({ navigation, route }) => {
-    console.log("route===", route.params.recipeData.ingridientsName
+    console.log("add kid===", route.params.recipeData.kid
     )
     const List = [
-        { id: 1, day: 'sunday' },
+        { id: 1, day: 'Sunday' },
         { id: 2, day: 'Monday' },
         { id: 3, day: 'Tuesday' },
         { id: 4, day: 'Wednesday' },
@@ -25,9 +25,9 @@ const AddToLunchBox = ({ navigation, route }) => {
     const [dayData, setDayData] = useState([])
     const [msg, setMsg] = useState([]);
     const [dayString, setDayString] = useState()
+
     const handlePress = (item, index) => {
         const check = [...arrData];
-        //const select = [...arrData];
         const message = [...msg];
         const dayArrays = [...dayArray];
         let megs = '';
@@ -47,28 +47,33 @@ const AddToLunchBox = ({ navigation, route }) => {
         setArrData(check);
 
     };
+   
 
     const NavigateToLunchBoxScreen = (msg) => {
         const day = [...dayData]
-        msg.map((element) => {
+        msg.map((element, index) => {
             day.push(element.day)
             let DayInString = day.toString();
             setDayString(DayInString)
             setDayData(day)
-            if (msg !== []) {
+            if (msg !== [] && index === msg.length - 1) {
                 let parentId = route.params.recipeData.id
                 ApiHandler.addLunchBox(parentId, DayInString).then((response) => {
-                    console.log("add Luchbox===", response, DayInString)
-                    if (response.status === 200) {
-                        navigation.navigate('TabNavigators', {
-                            screen: 'LunchBox',
-                            params: { message: msg, flag: true, parentId: route.params.recipeData.id, recipeImage: route.params.recipeData.ingridientsImage, ingridientsName: route.params.recipeData.ingridientsName }
+                    if (response.id) {
+                        ApiHandler.getLunchBox(parentId).then((response) => {
+                            if (response) {
+                                console.log("updateDay===", response)
+                                navigation.navigate('TabNavigators', {
+                                    screen: 'LunchBox',
+                                    params: { message: msg, flag: true, parentId: route.params.recipeData.id, recipeImage: route.params.recipeData.ingridientsImage, ingridientsName: route.params.recipeData.ingridientsName, day: response.day.day,kid:route?.params?.recipeData?.kid }
+                                })
+                            } else {
+                                Alert.alert('please select Day')
+                            }
                         })
                     }
                 })
-            } else {
-                Alert.alert('please select Day')
-            }
+            } 
         })
     }
     return (

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, } from 'react'
-import { View, Text, Image, TextComponent, ScrollView, Dimensions, Alert } from 'react-native'
+import { View, Text, Image, TextComponent, ScrollView, Dimensions, Alert, Platform } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import ApiHandler from '../api/ApiHandler'
 import ButtonComponent from '../components/ButtomComponent'
@@ -8,8 +8,9 @@ import TextInputComponent from '../components/TextInputComponent'
 import { loginStyle } from '../style/LoginStyle'
 const screenHeight = Dimensions.get('window').height
 const screenWidth = Dimensions.get('window').width
-import PropTypes from 'prop-types'
-//import { GoogleSignin, statusCodes,GoogleSigninButton } from '@react-native-google-signin/google-signin';
+// import PropTypes from 'prop-types'
+// import * as AppAuth from 'expo-app-auth';
+// import * as GoogleSignIn from 'expo-google-sign-in';
 
 
 const LoginScreen = ({ navigation }) => {
@@ -17,15 +18,13 @@ const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [userName, setUserName] = useState('')
-    const [userGoogleInfo,setUserGoogleInfo]=useState({})
-    const [loaded,setLoaded] = useState(false)
+    const [userGoogleInfo, setUserGoogleInfo] = useState(null)
+    const [loaded, setLoaded] = useState(false)
+    const [showPassword, setShowPassword] = useState(false)
 
-//    useEffect(()=>{
-//     GoogleSignin.configure({
-//         webClientId: "236411888952-ggjlkq9bi5efid178ej8dnu0ek2jq86a.apps.googleusercontent.com", 
-//         offlineAccess: true
-//       });
-//    },[])
+    useEffect(() => {
+        //   initAsync()
+    }, [])
 
     const singUpData = () => {
         setSingUp(!singUp)
@@ -33,24 +32,61 @@ const LoginScreen = ({ navigation }) => {
 
     const moveTomainScreen = async (email, password) => {
         ApiHandler.login(email, password).then((response) => {
-            if (response === 200) {
-                navigation.navigate('welcome',{userName:email})
+            console.log("response===", response)
+            if (response.response) {
+                navigation.navigate('Child', { userName: response.name, parentId: response.response })
             } else {
-                Alert.alert(`LoginUser is not present:${email}`)
+                Alert.alert(`LoginUser is not present:${email, password}`)
             }
         })
     }
-    const googleSingIn = ()=>{
+    // const IosClintId='200403249051-pc9ne4p1tusrb3o1msp37kfqjgqho3fg.apps.googleusercontent.com'
+    // const initAsync = async()=>{
+    //     try {
+    //        await GoogleSignin.initAsync({
+    //           clintId:IosClintId
+    //        })
+    //        getUserDetaikls()
+    //     } catch(e){
+    //         alert('GoogleSignIn.initAsync(): ' + message);
+    //     }
+    // }
 
-    }
+    // const getUserDetaikls = async()=>{
+    //     const user = await GoogleSignIn.signInSilentlyAsync();
+    //     setUserGoogleInfo(user)
+    // }
+    //    const signInAsync = async () => {
+    //         try {
+    //           await GoogleSignIn.askForPlayServicesAsync();
+    //           const { type, user } = await GoogleSignIn.signInAsync();
+    //           if (type === 'success') {
+    //             getUserDetaikls();
+    //           }
+    //         } catch ({ message }) {
+    //           alert('login: Error:' + message);
+    //         }
+    //       };
+    //       const  onPress = () => {
+    //         if (userGoogleInfo) {
+    //           signOutAsync();
+    //         } else {
+    //           signInAsync();
+    //         }
+    //       };
     const moveToSingUp = (password, userName, email) => {
         ApiHandler.singUp(password, userName, email).then((response) => {
-            if (response === true) {
-                navigation.navigate('welcome')
+            console.log("singup===", response)
+            if (response.response) {
+                navigation.navigate('welcome', { userName: response.name, parentId: response.response })
             } else {
                 console.log("error====")
             }
         })
+    }
+
+    const hideShowPassword = () => {
+        setShowPassword(!showPassword)
     }
 
     return (
@@ -82,7 +118,7 @@ const LoginScreen = ({ navigation }) => {
                                 symbol="email"
                                 value={email}
                                 onChangeText={(text) => setEmail(text)}
-                                inputStyle={loginStyle.inputStyle}
+                                inputStyle={[loginStyle.inputStyle, { justifyContent: 'space-evenly', right: 20 }]}
                                 icon
                                 inputContainer={loginStyle.inputViewStyle}
                             />
@@ -97,6 +133,10 @@ const LoginScreen = ({ navigation }) => {
                                 onChangeText={(text) => setPassword(text)}
                                 icon
                                 inputContainer={loginStyle.inputViewStyle}
+                                secureTextEntry={showPassword ? false : true}
+                                eyeSymbol={showPassword ? 'eye' : 'eye-with-line'}
+                                onEyePress={() => hideShowPassword()}
+                                showHidePassword
                             />
                         </View>
                         {
@@ -109,17 +149,17 @@ const LoginScreen = ({ navigation }) => {
                                     symbol={'lock'}
                                     icon
                                     inputContainer={loginStyle.inputViewStyle}
+                                    secureTextEntry={showPassword ? false : true}
+                                    eyeSymbol={showPassword ? 'eye' : 'eye-with-line'}
+                                    onEyePress={() => hideShowPassword()}
+                                    showHidePassword
                                 />
                             </View>
                         }
 
                         {
-                            !singUp && <Text style={[loginStyle.forgotPassword, { alignSelf: 'flex-end', right: 10, }]}>Forget Password</Text>
+                            !singUp && <Text onPress={() => navigation.navigate('ForgotPassword', { email: email })} style={[loginStyle.forgotPassword, { alignSelf: 'flex-end', right: 10, }]}>Forget Password</Text>
                         }
-                        {
-                            console.log("singup=====", !singUp)
-                        }
-
                         <ButtonComponent
                             buttonStyle={{ borderRadius: 30, backgroundColor: '#FFAB00' }}
                             text={!singUp ? "LOGIN" : "SIGN UP"}
@@ -132,6 +172,7 @@ const LoginScreen = ({ navigation }) => {
                             <ButtonComponent
                                 showImage
                                 buttonStyle={{ backgroundColor: 'white', borderWidth: 1, justifyContent: 'center', width: 100, alignSelf: 'center', borderRadius: 30, height: 35, borderColor: '#0B8457' }}
+                            // onPress={()=>onPress()}
                             />
                         </View>
                     </View>

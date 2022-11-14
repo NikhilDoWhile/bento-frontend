@@ -10,10 +10,9 @@ const screenHeight = Dimensions.get('window').height
 const screenWidth = Dimensions.get('window').width
 
 const HomeScreen = ({ navigation, route }) => {
-    console.log("homeScreen===", route)
 
     const [toggleButton, setToggleButton] = useState(false)
-    // const [flag,setFla]
+    console.log("route kid===", route.params.kid)
 
     const toggleDataMatche = () => {
         setToggleButton(false)
@@ -38,7 +37,7 @@ const HomeScreen = ({ navigation, route }) => {
 
                 <View style={styles.mainContainer}>
                     {
-                        !toggleButton ? route.params.response.matchedRecipe.length > 0 ? <RecipeComponent flag={'flag'} data={route.params.response.matchedRecipe} navigation={navigation} selectedIngredients={route.params.selectedIngredients} /> : <NonMatchRecipeText /> : <RecipeComponent data={route.params.response.unMatchedRecipe} navigation={navigation} selectedIngredients={route.params.selectedIngredients} />
+                        !toggleButton ? route?.params?.response?.matchedRecipe.length > 0 ? <RecipeComponent kid={route?.params?.kid} flag={'flag'} data={route?.params?.response?.matchedRecipe} navigation={navigation} selectedIngredients={route?.params?.selectedIngredients} /> : <NonMatchRecipeText /> : <RecipeComponent data={route?.params?.response?.unMatchedRecipe} navigation={navigation} selectedIngredients={route?.params?.selectedIngredients} />
                     }
                     <ButtonComponent
                         text={'update pantry'}

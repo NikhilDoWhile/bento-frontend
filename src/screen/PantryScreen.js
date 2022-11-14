@@ -9,36 +9,37 @@ import ImageComponent from '../components/ImageComponent'
 import SearchComponent from '../components/SearchComponent'
 import { pantryStyle } from '../style/PantryStyle'
 
-
-const PantryScreen = ({ navigation }) => {
+const PantryScreen = ({ navigation, route }) => {
     const [list, setList] = useState([])
     const [filterData, setFilterData] = useState([])
     const [arrData, setArrData] = useState([]);
     const [dayArray, setDayArray] = useState([])
     const [msg, setMsg] = useState([]);
-    const [selectedArray,setSelectedArray] = useState([])
+    const [selectedArray, setSelectedArray] = useState([])
 
     useEffect(() => {
         getAllIngredients();
     }, [])
+
     const getAllIngredients = () => {
         ApiHandler.getAllIngredients().then((response) => {
             setList(response)
             setFilterData(response)
         })
     }
+
     const getMatchUnmatch = (message) => {
         ApiHandler.getmatchUnmatchIngredients(message).then((response) => {
-            // console.log("response===", response.matchedRecipe, msg)
             if (response && selectedArray.length > 0) {
 
                 navigation.navigate('TabNavigators', {
                     screen: 'Home',
                     params: {
                         response: response,
-                        messageLength:msg.length,
-                        selectedIngredients:selectedArray,
-                        id: response.id
+                        messageLength: msg.length,
+                        selectedIngredients: selectedArray,
+                        id: response.id,
+                        kid: route?.params?.kid
                     }
                 })
             } else {
@@ -46,47 +47,27 @@ const PantryScreen = ({ navigation }) => {
             }
         })
     }
-
-    // const handlePress = (item, index) => {
-
-    //     const check = [...arrData];
-    //     const message = [...msg];
-    //     if (check && check[index]) {
-    //         console.log("check", check[index])
-    //         check[index] = false;
-    //         const i = message.indexOf(item);
-    //         message.splice(i, 1);
-    //     } else {
-    //         check[index] = true;
-    //         message.push(item)
-    //     }
-    //     setMsg(message);
-    //     setArrData(check);
-    //     selectedRecipe()
-
-    // };
     const handlePress = (item, index) => {
-        let selectedData=[...selectedArray]
-        if(selectedRecipe(item)) {
-            const i=selectedData.indexOf(item)
-            selectedData.splice(i,1)
+        let selectedData = [...selectedArray]
+        if (selectedRecipe(item)) {
+            const i = selectedData.indexOf(item)
+            selectedData.splice(i, 1)
         } else {
             selectedData.push(item)
         }
-         setSelectedArray(selectedData)
+        setSelectedArray(selectedData)
     };
-    const selectedRecipe = (item)=>{
+    const selectedRecipe = (item) => {
         return selectedArray.includes(item)
-      
-    }
 
+    }
     const renderItem = ({ item, index }) => {
         return (
-            <TouchableOpacity onPress={() => handlePress(item.title, index)} style={[pantryStyle.itemContainer, { borderWidth:selectedRecipe(item.title) ? 1 : 0 }]}>
+            <TouchableOpacity onPress={() => handlePress(item.title, index)} style={[pantryStyle.itemContainer, { borderWidth: selectedRecipe(item.title) ? 1 : 0, borderColor: 'red' }]}>
                 <View style={[pantryStyle.ingridientsView]}>
                     <ImageComponent
                         source={item.url}
-                        imageStyle={{ height: 50, width: 50,alignSelf:'center' }}
+                        imageStyle={{ height: 50, width: 50, alignSelf: 'center' }}
                     />
                 </View>
                 <Text>{item.title}</Text>
@@ -109,11 +90,10 @@ const PantryScreen = ({ navigation }) => {
 
     return (
         <SafeAreaView style={[pantryStyle.container]}>
-            { console.log("selectedArray==",selectedArray)}
             <Header
-               onUserPress={()=>navigation.navigate('ProfileScreen')}
-               logo
-             />
+                onUserPress={() => navigation.navigate('ProfileScreen')}
+                logo
+            />
             <View style={[pantryStyle.mainContainer]}>
                 <Text style={{ fontSize: 17, marginTop: 10 }}>Please Select the ingridients you have available</Text>
                 <SearchComponent
@@ -130,14 +110,12 @@ const PantryScreen = ({ navigation }) => {
             <View style={{ flex: 1 / 10 }}>
                 <ButtonComponent
                     text={"Proceed"}
-                    buttonStyle={{ borderRadius: 20,bottom:10 }}
+                    buttonStyle={{ borderRadius: 20, bottom: 10 }}
                     onPress={() =>
                         getMatchUnmatch(selectedArray)
                     }
-
                 />
             </View>
-            {/* </ScrollView> */}
         </SafeAreaView>
     )
 }

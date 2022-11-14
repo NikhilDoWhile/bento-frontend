@@ -80,7 +80,7 @@ const AddKidScreen = ({route,navigation}) => {
                             </View>
                             <ButtonComponent
                                 buttonStyle={{ width: screenWidth / 5, alignSelf: 'center', borderRadius: 20 }}
-                                text={'='}
+                                text={'+'}
                                 onPress={() => addKidData()}
                             />
                         </ScrollView>

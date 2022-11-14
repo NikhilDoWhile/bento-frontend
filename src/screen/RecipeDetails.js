@@ -8,46 +8,43 @@ const screenHeight = Dimensions.get('window').height
 const screenWidth = Dimensions.get('window').width
 
 const RecipeDetails = ({ route, navigation }) => {
-    const [data,setData] = useState([])
-    const [selectedData,setSelectedData] = useState([])
- 
-    const matchIngredients = (item)=>{
-       let ingredient=route.params.selectedIngredients
-           if(ingredient.includes(item)) {
-             return true
-           } else {
-             return false
-           }
-    }
-   
+    const [data, setData] = useState([])
+    const [selectedData, setSelectedData] = useState([])
 
-    const navigateToScreen = ()=>{
-        const arr2=route.params.selectedIngredients
-        const arr1= route.params.ingredients
-        if(route.params.flag !=''){
+    const matchIngredients = (item) => {
+        let ingredient = route.params.selectedIngredients
+        if (ingredient.includes(item)) {
+            return true
+        } else {
+            return false
+        }
+    }
+
+
+    const navigateToScreen = () => {
+        const arr2 = route.params.selectedIngredients
+        const arr1 = route.params.ingredients
+        if (route.params.flag != '') {
             navigation.navigate("AddToLunchBox", { recipeData: route.params })
         } else {
-                const filtered = arr1.filter(el => {
-                   return arr2.indexOf(el) === -1;
-                });
-                let filterString = filtered.toString();
-                ApiHandler.addShoppingList(filterString).then((response)=>{
-                    console.log("adShoppingList===",response)
-                })
-            // console.log("filter===",filtered)
-            navigation.navigate('TabNavigators',{
-                screen:"ShoppingList"
-                
+            const filtered = arr1.filter(el => {
+                return arr2.indexOf(el) === -1;
+            });
+            let filterString = filtered.toString();
+            ApiHandler.addShoppingList(filterString).then((response) => {
+            })
+            navigation.navigate('TabNavigators', {
+                screen: "ShoppingList"
+
             })
         }
-       
+
     }
     return (
         <SafeAreaView style={styles.RecipeDetailsContainer}>
-            {console.log("matchIngredients",matchIngredients())}
             <Header
                 onBackPress={() => navigation.pop()}
-                onUserPress={()=>navigation.navigate('ProfileScreen')}
+                onUserPress={() => navigation.navigate('ProfileScreen')}
             />
             <ScrollView>
                 <Image
@@ -62,23 +59,23 @@ const RecipeDetails = ({ route, navigation }) => {
                     <View style={{ margin: 10 }}>
                         <Text style={{ fontSize: 17 }}>Ingredients</Text>
                         <FlatList
-                          data={route.params.ingredients}
-                          renderItem={({item})=>{
-                            return (
-                                <Text style={{ fontSize: 14, marginLeft: 10,color:matchIngredients(item) ? "black":'red' }}>{item}</Text>
-                            )
-                          }}
+                            data={route.params.ingredients}
+                            renderItem={({ item }) => {
+                                return (
+                                    <Text style={{ fontSize: 14, marginLeft: 10, color: matchIngredients(item) ? "black" : 'red' }}>{item}</Text>
+                                )
+                            }}
                         />
                     </View>
                     <View style={{ margin: 10 }}>
                         <Text style={{ fontSize: 17 }}>Instructions</Text>
                         <FlatList
-                           data={route.params.steps}
-                           renderItem={({item})=>{
-                            return(
-                                <Text style={{ fontSize: 14, marginLeft: 10 }}>{item}</Text>
-                            )
-                           }}
+                            data={route.params.steps}
+                            renderItem={({ item }) => {
+                                return (
+                                    <Text style={{ fontSize: 14, marginLeft: 10 }}>{item}</Text>
+                                )
+                            }}
                         />
                     </View>
                     {/* <View style={{ margin: 10 }}>
@@ -88,12 +85,11 @@ const RecipeDetails = ({ route, navigation }) => {
                     </View> */}
                     <ButtonComponent
                         buttonStyle={{ width: 200, borderRadius: 20, alignSelf: 'center' }}
-                        text={route.params.flag!=''?"Add To lunch":"Add to shoping List"}
-                        onPress={() =>navigateToScreen(route.params.ingredients,route.params.selectedIngredients)}
+                        text={route.params.flag != '' ? "Add To lunch" : "Add to shoping List"}
+                        onPress={() => navigateToScreen(route.params.ingredients, route.params.selectedIngredients)}
                     />
                 </View>
             </ScrollView>
-
         </SafeAreaView>
     )
 }

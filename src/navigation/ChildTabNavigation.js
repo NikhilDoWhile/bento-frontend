@@ -28,7 +28,7 @@ const ChildTabNavigators = () => {
             />
             <Tab.Screen
                 name="History List"
-                component={PantryScreen}
+                component={RatingScreen}
                 options={{
                     tabBarIcon: ({ tintColor, focused }) => (
                         <AntDesign size={20} color="black" name="appstore-o" />

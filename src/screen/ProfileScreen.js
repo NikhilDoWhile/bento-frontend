@@ -15,11 +15,15 @@ const ProfileScreen  = ({navigation})=>{
     const navigateToprofileScreen =(profile)=>{
          if(profile==='ProfileScreen') {
             navigation.navigate('Profile')
+         } else if(profile==='Manage Accounts') {
+              navigation.navigate("ManageAccounts")
+         } else if(profile==='Change Password') {
+            navigation.navigate('ForgotPassword')
          }
     }
     const renderItem = ({item})=>{
          return (
-            <TouchableOpacity style={{margin:5}}>
+            <TouchableOpacity onPress={()=>navigateToprofileScreen(item.screen)} style={{margin:5}}>
                 <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',paddingHorizontal:13}}>
                    <Text style={{margin:10}}>{item.screen}</Text>
                    <AntDesign onPress={()=>navigateToprofileScreen(item.screen)}  size={20} color="black" name="right" />

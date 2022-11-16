@@ -5,6 +5,7 @@ import ApiHandler from '../api/ApiHandler'
 import ButtonComponent from '../components/ButtomComponent'
 import Header from '../components/Header'
 import TextInputComponent from '../components/TextInputComponent'
+import Preferences from '../LocalStorage/Prefetences'
 import { loginStyle } from '../style/LoginStyle'
 
 const ForgotPassword = ({ navigation,route }) => {
@@ -16,18 +17,29 @@ const ForgotPassword = ({ navigation,route }) => {
         setShowPassword(!showPassword)
     }
 
+    // const changePassword = ()=>{
+    //     let email=route?.params?.email
+    //     if(newPassword===conformPassword&&email!=''){
+    //         ApiHandler.forgotPassword(email,newPassword).then((response)=>{
+    //             if(response?.response) {
+    //                 navigation.pop()
+    //             }
+    //         })
+    //     } else {
+    //         Alert.alert("Password not match")
+    //     }
+    // }
+
     const changePassword = ()=>{
-        let email=route?.params?.email
-        if(newPassword===conformPassword&&email!=''){
-            ApiHandler.forgotPassword(email,showPassword).then((response)=>{
-                console.log("forgot========",response)
-                if(response) {
-                    navigation.replace('login')
+        Preferences.getItem('userDetail').then((response)=>{
+            let  data= JSON.parse(response)
+            console.log("resp====",JSON.parse(response))
+            ApiHandler.forgotPassword(data?.email,newPassword).then((response)=>{
+                if(response?.response) {
+                    navigation.pop()
                 }
             })
-        } else {
-            Alert.alert("Password not match")
-        }
+        })
     }
     
     return (

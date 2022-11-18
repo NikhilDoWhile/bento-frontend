@@ -8,7 +8,7 @@ export const loginStyle = StyleSheet.create({
     loginImageView: {
         justifyContent: 'center',
         alignItems: 'center',
-        height: screenHeight / 3,
+        height: screenHeight / 2.75,
     },
     loginButton: {
         marginTop: 10,
@@ -34,12 +34,12 @@ export const loginStyle = StyleSheet.create({
         justifyContent: 'space-between'
     },
     inputViewStyle: {
-        borderWidth: 0.9,
-        borderColor: 'gray',
+        borderWidth: '1.0',
+        borderColor: '#F2E1E3',
         justifyContent: 'space-around',
         flexDirection: 'row',
         alignItems: 'center',
-        borderRadius: 10
-    }
+        borderRadius: 8
+    },
 })
 

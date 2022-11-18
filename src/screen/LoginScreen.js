@@ -112,10 +112,10 @@ const LoginScreen = ({ navigation }) => {
                     {
                         singUp &&
                         <View style={{ margin: 7 }}>
-                            <Text style={{ margin: 3, fontWeight: '600' }}>NAME</Text>
+                            <Text style={{ margin: 3, fontWeight: '600' }}>Name</Text>
                             <TextInputComponent
                                 placeholder={"Username"}
-                                inputStyle={[loginStyle.inputStyle, { borderWidth: 0.9, width: screenWidth / 1.04, borderColor: 'gray' }]}
+                                inputStyle={[loginStyle.inputStyle, { borderWidth: 0.2, width: screenWidth / 1.04, borderColor: 'gray' }]}
                                 value={userName}
                                 onChangeText={(text) => setUserName(text)}
                             />
@@ -123,7 +123,7 @@ const LoginScreen = ({ navigation }) => {
                     }
                     <View>
                         <View style={{ margin: 7 }}>
-                            <Text style={{ margin: 3, fontWeight: '600' }}>EMAIL</Text>
+                            <Text style={{ margin: 3, fontWeight: '600' }}>Email</Text>
                             <TextInputComponent
                                 placeholder={"username@email.com"}
                                 symbol="email"
@@ -135,7 +135,7 @@ const LoginScreen = ({ navigation }) => {
                             />
                         </View>
                         <View style={{ margin: 7 }}>
-                            <Text style={{ margin: 3, fontWeight: '600' }}>PASSWORD</Text>
+                            <Text style={{ margin: 3, fontWeight: '600' }}>Password</Text>
                             <TextInputComponent
                                 placeholder={"********"}
                                 inputStyle={loginStyle.inputStyle}
@@ -153,7 +153,7 @@ const LoginScreen = ({ navigation }) => {
                         {
                             singUp &&
                             <View style={{ margin: 7 }}>
-                                <Text style={{ margin: 3, fontWeight: '600' }}>CONFIRM PASSWORD</Text>
+                                <Text style={{ margin: 3, fontWeight: '600' }}>Confirm Password</Text>
                                 <TextInputComponent
                                     placeholder={"********"}
                                     inputStyle={loginStyle.inputStyle}
@@ -169,7 +169,7 @@ const LoginScreen = ({ navigation }) => {
                         }
 
                         {
-                            !singUp && <Text onPress={()=>navigation.navigate('ForgotPassword',{email:email})} style={[loginStyle.forgotPassword, { alignSelf: 'flex-end', right: 10, }]}>Forget Password</Text>
+                            !singUp && <Text onPress={()=>navigation.navigate('ForgotPassword',{email:email})} style={[loginStyle.forgotPassword, { alignSelf: 'flex-end', right: 10, }]}>Forget your Password?</Text>
                         }
                         <ButtonComponent
                             buttonStyle={{ borderRadius: 30, backgroundColor: '#FFAB00' }}
@@ -177,7 +177,7 @@ const LoginScreen = ({ navigation }) => {
                             onPress={() => !singUp ? moveTomainScreen(email, password) : moveToSingUp(password, userName, email)}
                         />
                         <View style={{ padding: 10 }}>
-                            <Text style={[loginStyle.forgotPassword]}>{!singUp ? "Or login with" : "or sign with"}</Text>
+                            <Text style={[loginStyle.forgotPassword]}>{!singUp ? "or" : "or sign with"}</Text>
                         </View>
                         <View style={{ padding: 10 }}>
                             <ButtonComponent
@@ -188,7 +188,7 @@ const LoginScreen = ({ navigation }) => {
                         </View>
                     </View>
                     <View style={[loginStyle.loginButton]}>
-                        <Text style={[loginStyle.loginSingInSingUpText]}>{!singUp ? "Don't have and account" : "Already have an account"} ?<Text onPress={() => singUpData()} style={[loginStyle.singUpColor]}>{!singUp ? " Sign in" : " Login"}</Text></Text>
+                        <Text style={[loginStyle.loginSingInSingUpText]}>{!singUp ? "You don't have an account" : "Already have an account"} ?<Text onPress={() => singUpData()} style={[loginStyle.singUpColor]}>{!singUp ? " Sign Up" : " Login"}</Text></Text>
 
                     </View>
                 </View>

@@ -19,6 +19,8 @@ const ProfileScreen  = ({navigation})=>{
               navigation.navigate("ManageAccounts")
          } else if(profile==='Change Password') {
             navigation.navigate('ForgotPassword')
+         } else if(profile==='Push Notification') {
+            navigation.navigate('PushNotification')
          }
     }
     const renderItem = ({item})=>{

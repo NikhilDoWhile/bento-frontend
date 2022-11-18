@@ -2,13 +2,14 @@ import { baseUrl } from "./baseUrl.";
 
 export default class ApiHandler {
     static login = async (email, password) => {
+        console.log("login url===",baseUrl.login + `userName=${email}&password=${password}`)
         try {
             const fetchResponse = await fetch(baseUrl.login + `userName=${email}&password=${password}`);
             if (fetchResponse.status === 200) {
                 let data=fetchResponse.json()
                 return data
             } else {
-                return 404;
+                return fetchResponse.status
             }
         } catch (e) {
             console.log("error==", e)
@@ -72,8 +73,8 @@ export default class ApiHandler {
             console.log("removeShoppingList",e);
         }
     }
-    static addLunchBox = async (parentId,day) => {
-        console.log("day========",baseUrl.addLunchBox + `parentId=${parentId}&day=${day}`)
+    static addLunchBox = async (recipeId,parentId,day) => {
+        console.log("day========",recipeId,parentId,day)
         try {
             const params = {
                 method: 'POST',
@@ -82,7 +83,7 @@ export default class ApiHandler {
                     'Content-Type': 'application/json'
                 },
             }
-            const fetchResponse = await fetch(baseUrl.addLunchBox + `parentId=${parentId}&day=${day}`, params);
+            const fetchResponse = await fetch(baseUrl.addLunchBox + `${recipeId}?parentId=${parentId}&day=${day}`, params);
             const data= fetchResponse.json()
             return data
              
@@ -154,10 +155,99 @@ export default class ApiHandler {
             }
             const fetchResponse = await fetch(baseUrl.forgotPassword + `userName=${userName}&password=${password}`, params);
             const data= fetchResponse.json()
+            console.log("data====",data)
             return data
              
         } catch (e) {
             console.log("forgotpassword==", e)
+        }
+    }
+    static assignKid = async (LunchBoxId,parentId,kidsName,day) => {
+       console.log("day========",baseUrl.addLunchBox + `${LunchBoxId}?parentId=${parentId}&kidsName=${kidsName}&day=${day}`)
+        try {
+            const params = {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+            }
+            const fetchResponse = await fetch(baseUrl.assignKid + `${LunchBoxId}?parentId=${parentId}&kidsName=${kidsName}&day=${day}`, params);
+            const data= fetchResponse.json()
+            return data
+             
+        } catch (e) {
+            console.log("addLunchBox==", e)
+        }
+    }
+    static getAssignKid =async (parentId) =>{
+        console.log("baseUrl====",baseUrl.getAssignKid+ `${parentId}`)
+        try {
+            let fetchResponse= await fetch (baseUrl.getAssignKid+ `${parentId}`)
+            let data=fetchResponse.json()
+            return data;
+        } catch (e){
+            console.log("getKid==",e)
+        }
+    }
+    static addrating = async (parentId,rating,kidName) => {
+        try {
+            const params = {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+            }
+            const fetchResponse = await fetch(baseUrl.addRating + `parentId=${parentId}&rating=${rating}&kidName=${kidName}`, params);
+            const data=fetchResponse.json()
+            return data;
+        } catch (e) {
+            console.log("singup===", e)
+        }
+    }
+    static getRating =async (parentId,kidName) =>{
+        console.log("url===",baseUrl.getRating+ `parentId=${parentId}&kidName${kidName}`)
+        try {
+            let fetchResponse= await fetch (baseUrl.getRating+ `parentId=${parentId}&kidName=${kidName}`)
+            let data=fetchResponse.json()
+            return data;
+        } catch (e){
+            console.log("getKid==",e)
+        }
+    }
+    static updateProfile = async (parentId,password,name) => {
+        console.log("url=====",baseUrl.updateProfile + `parentId=${parentId}/parent/normal?password=${password}&name=${name}`)
+        try {
+            const params = {
+                method: 'PATCH',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+            }
+            const fetchResponse = await fetch(baseUrl.updateProfile + `${parentId}/parent/normal?password=${password}&name=${name}`, params);
+            const data=fetchResponse.json()
+            return data;
+        } catch (e) {
+            console.log("singup===", e)
+        }
+    }
+    static deleteKid = async (parentId,kidName,) => {
+        try {
+            const params = {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+            }
+            const fetchResponse = await fetch(baseUrl.deleteKid + `parentId=${parentId}&kidName=${kidName}`, params);
+            const data= fetchResponse.json()
+            return data
+             
+        } catch (e) {
+            console.log("addLunchBox==", e)
         }
     }
 }

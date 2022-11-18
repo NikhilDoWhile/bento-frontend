@@ -10,10 +10,10 @@ const screenHeight = Dimensions.get('window').height
 const screenWidth = Dimensions.get('window').width
 
 const HomeScreen = ({ navigation, route }) => {
-
+   
     const [toggleButton, setToggleButton] = useState(false)
-    console.log("route kid===", route.params.kid)
-
+    console.log("route kid===",route.params.kid)
+  
     const toggleDataMatche = () => {
         setToggleButton(false)
     }
@@ -24,7 +24,7 @@ const HomeScreen = ({ navigation, route }) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <Header logo onUserPress={() => navigation.navigate('ProfileScreen')} />
+            <Header logo onUserPress={()=>navigation.navigate('ProfileScreen')} />
             <View style={{ flex: 1 }}>
                 <View style={styles.homeScreenButton}>
                     <TouchableOpacity onPress={() => toggleDataMatche()} style={[styles.matchButton, { backgroundColor: toggleButton ? "#F6F3E7" : '#FC6474', borderTopLeftRadius: 10, borderBottomLeftRadius: 10 }]}>
@@ -37,14 +37,14 @@ const HomeScreen = ({ navigation, route }) => {
 
                 <View style={styles.mainContainer}>
                     {
-                        !toggleButton ? route?.params?.response?.matchedRecipe.length > 0 ? <RecipeComponent kid={route?.params?.kid} flag={'flag'} data={route?.params?.response?.matchedRecipe} navigation={navigation} selectedIngredients={route?.params?.selectedIngredients} /> : <NonMatchRecipeText /> : <RecipeComponent data={route?.params?.response?.unMatchedRecipe} navigation={navigation} selectedIngredients={route?.params?.selectedIngredients} />
+                        !toggleButton ? route?.params?.response?.matchedRecipe.length>0 ?<RecipeComponent parentId={route?.params?.parentId} kid={route?.params?.kid} flag={'flag'} data={route?.params?.response?.matchedRecipe} navigation={navigation} selectedIngredients={route?.params?.selectedIngredients}/>:<NonMatchRecipeText /> : <RecipeComponent data={route?.params?.response?.unMatchedRecipe} navigation={navigation} selectedIngredients={route?.params?.selectedIngredients} />
                     }
-                    <ButtonComponent
-                        text={'update pantry'}
-                        onPress={() => navigation.navigate('TabNavigators', {
-                            screen: 'ShoppingList'
-                        })}
-                        buttonStyle={{ width: 200, alignSelf: 'center', borrderRadius: 20, position: 'absolute', top: 530 }} />
+                        <ButtonComponent
+                            text={'update pantry'}
+                            onPress={()=>navigation.navigate('TabNavigators',{
+                                screen:'ShoppingList'
+                            })}
+                            buttonStyle={{ width: 200, alignSelf: 'center', borrderRadius: 20, position: 'absolute', top: 530 }} /> 
                 </View>
             </View>
         </SafeAreaView>

@@ -9,13 +9,14 @@ import ImageComponent from '../components/ImageComponent'
 import SearchComponent from '../components/SearchComponent'
 import { pantryStyle } from '../style/PantryStyle'
 
-const PantryScreen = ({ navigation, route }) => {
+const PantryScreen = ({ navigation,route }) => {
     const [list, setList] = useState([])
     const [filterData, setFilterData] = useState([])
     const [arrData, setArrData] = useState([]);
     const [dayArray, setDayArray] = useState([])
     const [msg, setMsg] = useState([]);
     const [selectedArray, setSelectedArray] = useState([])
+    // console.log("parentId==",route?.params?.parentId)
 
     useEffect(() => {
         getAllIngredients();
@@ -30,6 +31,7 @@ const PantryScreen = ({ navigation, route }) => {
 
     const getMatchUnmatch = (message) => {
         ApiHandler.getmatchUnmatchIngredients(message).then((response) => {
+            console.log("get match and unmatch==",response)
             if (response && selectedArray.length > 0) {
 
                 navigation.navigate('TabNavigators', {
@@ -39,7 +41,8 @@ const PantryScreen = ({ navigation, route }) => {
                         messageLength: msg.length,
                         selectedIngredients: selectedArray,
                         id: response.id,
-                        kid: route?.params?.kid
+                        kid:route?.params?.kid,
+                        parentId:route?.params?.parentId
                     }
                 })
             } else {
@@ -63,8 +66,8 @@ const PantryScreen = ({ navigation, route }) => {
     }
     const renderItem = ({ item, index }) => {
         return (
-            <TouchableOpacity onPress={() => handlePress(item.title, index)} style={[pantryStyle.itemContainer, { borderWidth: selectedRecipe(item.title) ? 1 : 0, borderColor: 'red' }]}>
-                <View style={[pantryStyle.ingridientsView]}>
+            <TouchableOpacity onPress={() => handlePress(item.title, index)} style={[pantryStyle.itemContainer, { borderWidth: selectedRecipe(item.title) ? 1 : 0 ,borderColor:'skyblue'}]}>
+                <View style={[pantryStyle.ingridientsView,{backgroundColor:'#F6F3E7'}]}>
                     <ImageComponent
                         source={item.url}
                         imageStyle={{ height: 50, width: 50, alignSelf: 'center' }}
@@ -89,7 +92,7 @@ const PantryScreen = ({ navigation, route }) => {
     }
 
     return (
-        <SafeAreaView style={[pantryStyle.container]}>
+        <SafeAreaView style={[pantryStyle.container,{backgroundColor:'white'}]}>
             <Header
                 onUserPress={() => navigation.navigate('ProfileScreen')}
                 logo

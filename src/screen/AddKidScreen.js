@@ -54,17 +54,17 @@ const AddKidScreen = ({route,navigation}) => {
         <SafeAreaView style={Styles.container}>
             <Header />
             <View style={{ flex: 1, justifyContent: 'center' }}>
-                <View style={{ flex: 1 / 1.2, backgroundColor: '#E1F6FF'}}>
+                <View style={{ flex: 1 / 1, backgroundColor: 'white'}}>
                     <View style={{ flex: 9 / 10 }}>
                         <ScrollView>
-                            <Text style={{ fontSize: 20, alignSelf: 'center', margin: 10 }}>Add Your Kid</Text>
+                            <Text style={{ fontSize: 20, alignSelf: 'center', margin: 10, color:'#FFAB00' }}>Setup your Family</Text>
                             {updateKid()}
                             <View style={{ margin: 10 }}>
-                            <Text style={{ fontSize: 16,fontWeight:'900', margin: 10}}>Kid 1</Text>
+                            <Text style={{ fontSize: 16,fontWeight:'900', margin: 10}}>Kid</Text>
                                 <Text style={{ fontSize: 16, marginLeft: 10 }}>Name</Text>
                                 <TextInputComponent
                                     placeholder={"Add Kid"}
-                                    inputStyle={[loginStyle.inputStyle, { borderWidth: 0.9, width: screenWidth / 1.10, borderColor: 'gray', alignSelf: 'center' }]}
+                                    inputStyle={[loginStyle.inputStyle, { borderWidth: 0.9, width: screenWidth / 1.10, borderColor: '#F2E1E3', alignSelf: 'center' }]}
                                     onChangeText={(text) => setName(text)}
                                     value={name}
                                 />
@@ -73,22 +73,22 @@ const AddKidScreen = ({route,navigation}) => {
                                 <Text style={{ fontSize: 16, marginLeft: 10 }}>Age</Text>
                                 <TextInputComponent
                                     placeholder={"Age"}
-                                    inputStyle={[loginStyle.inputStyle, { borderWidth: 0.9, width: screenWidth / 6, borderColor: 'gray', marginLeft: 5 }]}
+                                    inputStyle={[loginStyle.inputStyle, { borderWidth: 0.9, width: screenWidth / 6, borderColor: '#F2E1E3', marginLeft: 5 }]}
                                     onChangeText={(text) => setAge(text)}
                                     value={age}
                                 />
                             </View>
                             <ButtonComponent
-                                buttonStyle={{ width: screenWidth / 5, alignSelf: 'center', borderRadius: 20 }}
-                                text={'='}
+                                buttonStyle={{ width: screenWidth / 10, alignSelf: 'center', borderRadius: 100 , backgroundColor:'#FC6474'}}
+                                text={'+'}
                                 onPress={() => addKidData()}
                             />
                         </ScrollView>
                     </View>
-                    <View style={{ flex: 1 / 10, backgroundColor: '#E1F6FF' }}>
+                    <View style={{ flex: 1 / 10, backgroundColor: 'white' }}>
                         <ButtonComponent
-                            buttonStyle={{ width: screenWidth / 5, alignSelf: 'center', borderRadius: 20 }}
-                            showArrow
+                            buttonStyle={{ width: screenWidth / 2, alignSelf: 'center', borderRadius: 20 }}
+                            text={'Continue'}
                             onPress={()=>navigateToScreen()}
                         />
                     </View>

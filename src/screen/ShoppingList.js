@@ -68,10 +68,10 @@ const ShoppingListScreen = ({navigation}) => {
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 20, marginTop: 10 }}>
                 <TouchableOpacity onPress={()=>handlePress(item,index)} style={{ flexDirection: 'row' }}>
                     <MaterialCommunityIcons color={'black'} size={25} name={arrData[index] ? "checkbox-marked-outline" : 'checkbox-blank-outline'} />
-                    <Text style={{ fontSize: 16, left: 10 }}>{item}</Text>
+                    <Text style={{ fontSize: 16, left: 10,color:arrData[index] ?"lightgray":'black' }}>{item}</Text>
                 </TouchableOpacity>
-               <TouchableOpacity  disabled={arrData[index]? false : true} onPress={()=>removeShoppingList(item)} style={{ height: 20, width: 20, backgroundColor:arrData[index]?"gray":'white', borderRadius: 20, justifyContent: 'center', alignItems: 'center' }}>
-                    <Entypo color={'black'} size={20} name={arrData[index] ?'cross':''} />
+               <TouchableOpacity  disabled={arrData[index]? false : true} onPress={()=>removeShoppingList(item)} style={{ height: 20, width: 20, backgroundColor:arrData[index]?"black":'white', borderRadius: 20, justifyContent: 'center', alignItems: 'center' }}>
+                    <Entypo color={'white'} size={20} name={arrData[index] ?'cross':''} />
                 </TouchableOpacity>
             </View>
         )
@@ -81,9 +81,12 @@ const ShoppingListScreen = ({navigation}) => {
         <SafeAreaView style={styles.container}>
             <Header
                 showHeaderTitle
-                headerTitle={'Shopping List'}
+                logo
             />
             <View style={{ flex: 1, }}>
+            <View style={{flex:1/17,justifyContent:'center',alignItems:'center'}}>
+               <Text style={{fontSize:23,fontWeight:'500'}}>Shopping List</Text>
+            </View>
                 <View style={{ flex: 9 / 10, }}>
                     <SearchComponent
                         searchStyle={{ borderColor: 'gray' }}

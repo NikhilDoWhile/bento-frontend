@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Suspense } from 'react'
 import { StyleSheet, View, Text, FlatList, Dimensions, Image, Modal, TouchableOpacity, ImageBackground } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Header from '../components/Header'
@@ -12,65 +12,92 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import ApiHandler from '../api/ApiHandler'
 
 const LunchBoxScreen = ({ route, navigation }) => {
-    const list = [
-        { id: 1, name: 'bella', checked: 'false' },
-        { id: 2, name: 'jenna', clecked: 'false' }
-    ]
+    // const list = [
+    //     { id: 1, name: 'bella', checked: 'false' },
+    //     { id: 2, name: 'jenna', clecked: 'false' }
+    // ]
     const [data, setData] = useState(route?.params?.day)
     const [flag, setFlag] = useState(false)
     const [modalVisible, setModalVisible] = useState(false);
     const [select, setSelect] = useState(true)
     const [nameData, setnameData] = useState(route?.params?.kid)
+    const [ kidAssign,setKidAssign] = useState([])
+    const [day,setDay] = useState('')
 
     useEffect(() => {
         setFlag(route?.params?.flag)
 
     }, [])
-    const modalPopUp = () => {
+    const modalPopUp = (item) => {
+        setDay(item)
         setModalVisible(!modalVisible)
     }
-
+  
     const showButton = (value, index) => {
         const newValue = nameData.map((checkbox, i) => {
+            const assignKidName = [...kidAssign]
             if (i !== index)
                 return {
                     ...checkbox,
-                    checked: false,
+                    checked: checkbox.checked,
                 }
             if (i === index) {
                 const item = {
                     ...checkbox,
                     checked: !checkbox.checked,
                 }
+                console.log("item==",item)
+               if(item.checked===true) {
+                  assignKidName.push(item.name)
+               } else {
+                   assignKidName.splice(0,1)
+               }
+                setKidAssign(assignKidName)
                 return item
+               
             }
             return checkbox
         })
         setnameData(newValue)
     }
     const removeData = (id) => {
-        let newArray = [...data]
-        newArray.splice(id, 1)
-        setData(newArray)
+        console.log("id")
+        // let newArray = [...data]
+        // newArray.splice(id, 1)
+        // setData(newArray)
     }
-    const renderItem = ({ item, index }) => {
+    const assignKid = (day)=>{
 
+        console.log("name===",kidAssign,day)
+        let kidName=kidAssign.toString();
+        let lunchBoxId=route?.params?.id
+        let parentId=route?.params?.parentId
+        ApiHandler.assignKid(lunchBoxId,parentId,kidName,day).then((response)=>{
+            console.log("response===  74",response)
+           if(response){
+            setModalVisible(!modalVisible)
+           }
+        })
+      
+    }
+    const renderItem = ({ item,index }) => {
+       console.log("day===",item.day)
         return (
-            <TouchableOpacity onPress={() => modalPopUp()} style={{ width: '100%', height: screenHeight / 3.5, backgroundColor: 'white', marginTop: 10, justifyContent: 'space-evenly', }}>
+            <TouchableOpacity onPress={() => modalPopUp(item.day)} style={{ width: '100%', height: screenHeight / 3.5, backgroundColor: 'white', marginTop: 10, justifyContent: 'space-evenly', }}>
                 <Text style={{ fontSize: 20, marginLeft: 22 }}>{item.day}</Text>
                 <View style={{ width: screenWidth / 1.14, height: screenHeight / 4.5, backgroundColor: '#F6F3E7', alignSelf: 'center', borderRadius: 10 }}>
                     <ImageBackground
                         source={{ uri: item.recipeImage }}
                         style={{ flex: 7 / 8, borderTopLeftRadius: 10, borderTopRightRadius: 10 }}
                     >
-                        <TouchableOpacity onPress={() => removeData(index)} style={{ backgroundColor: 'white', width: 40, alignSelf: 'flex-end', justifyContent: 'center', alignItems: 'center' }}>
-                            <Entypo size={29} color="black" name="cross" />
+                        <TouchableOpacity onPress={() => removeData(index)} style={{ backgroundColor: 'transparent', width: 25, alignSelf: 'flex-end', justifyContent: 'center', alignItems: 'center',borderRadius:30,right:10,top:10,borderColor:'black',borderWidth:1,height:25 }}>
+                            <Entypo size={20} color="black" name="cross" />
                         </TouchableOpacity>
                     </ImageBackground>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', flex: 2 / 8, alignItems: 'center', paddingHorizontal: 10 }}>
                         <Text>{item.recipeName}</Text>
                         <View>
-                            <Feather size={22} color="gray" name="user" />
+                        <Feather size={22} color="gray" name="user" />
                         </View>
                     </View>
                 </View>
@@ -90,12 +117,12 @@ const LunchBoxScreen = ({ route, navigation }) => {
                                 keyExtractor={(item) => item.id}
                                 renderItem={({ item, index }) => {
                                     return (
-                                        <View style={{ flexDirection: 'row', justifyContent: 'space-around', }}>
-                                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                        <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', }}>
+                                            <View style={{ flexDirection: 'row', justifyContent:'flex-start',width:screenWidth/2 }}>
                                                 <Feather size={22} color="gray" name="user" />
                                                 <Text style={{ marginLeft: 10 }}>{item.name}</Text>
                                             </View>
-                                            <MaterialCommunityIcons color={'#FC6474'} onPress={() => showButton(item.checked, index)} size={25} name={item.checked ? "checkbox-blank-circle-outline" : 'checkbox-marked-circle-outline'} />
+                                            <MaterialCommunityIcons style={{alignSelf:'flex-end'}} color={'#FC6474'} onPress={() => showButton(item.checked, index)} size={25} name={!item.checked ? "checkbox-blank-circle-outline" : 'checkbox-marked-circle-outline'} />
                                         </View>
                                     )
                                 }}
@@ -105,11 +132,12 @@ const LunchBoxScreen = ({ route, navigation }) => {
                             <ButtonComponent
                                 buttonStyle={{ width: '35%', borderRadius: 20 }}
                                 text={'save'}
+                                onPress={()=>assignKid(day)}
                             />
                             <ButtonComponent
                                 buttonStyle={{ width: '35%', borderRadius: 20, backgroundColor: 'white', borderWidth: 1, borderColor: 'orange' }}
                                 text={'cancel'}
-                                onPress={() => modalPopUp()}
+                                onPress={() => modalPopUp(item)}
                                 textStyle={{ color: 'black' }}
                             />
                         </View>
@@ -122,16 +150,18 @@ const LunchBoxScreen = ({ route, navigation }) => {
         <SafeAreaView style={{ flex: 1, backgroundColor: 'white', opacity: modalVisible === true ? 0.1 : 1, }}>
             <Header
                 showHeaderTitle
-                headerTitle="Lunch Box"
-                onUserPress={() => navigation.navigate('ProfileScreen')}
-                onBackPress={() => navigation.pop()}
+                logo
+                onUserPress={()=>navigation.navigate('ProfileScreen')}
             />
+            <View style={{flex:1/5,justifyContent:'center',alignItems:'center'}}>
+               <Text style={{fontSize:23,fontWeight:'500'}}>Lunchbox</Text>
+            </View>
             {
                 flag ?
                     <View>
                         <FlatList
                             data={route?.params?.message}
-                            keyExtractor={(item) => item.id}
+                           keyExtractor={(item) => item.id}
                             renderItem={renderItem}
                         />
                     </View>

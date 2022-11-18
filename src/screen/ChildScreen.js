@@ -7,7 +7,7 @@ import ChildComponent from '../components/ChildrenComponent'
 
 const ChildScreen = ({ navigation, route }) => {
     const [kidData,setKidData] = useState([])
-
+    
     useEffect(()=>{
        getKid()
     },[])
@@ -27,7 +27,7 @@ const ChildScreen = ({ navigation, route }) => {
             <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                 <ChildComponent
                     name={route?.params?.userName}
-                    onPress={() => navigation.navigate('Pantry',{kid:kidData})} />
+                    onPress={() => navigation.navigate('Pantry',{kid:kidData,parentId:route?.params?.parentId})} />
             </View>
             <View style={{alignItems:'center'}}>
                     <FlatList
@@ -38,7 +38,14 @@ const ChildScreen = ({ navigation, route }) => {
                         return(
                             <ChildComponent
                             name={item.name}
-                            onPress={() => navigation.navigate('ChildTabNavigators')} />
+                            onPress={() => 
+                                 navigation.navigate('ChildTabNavigators', {
+                                screen: 'ChildLunchBox',
+                                params:  {parentId:route.params.parentId,name:item.name}
+                            })
+                        }
+                          
+                             />
                         )
                        }}
                     />

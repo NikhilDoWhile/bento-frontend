@@ -7,7 +7,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import ApiHandler from "../api/ApiHandler";
 
 const AddToLunchBox = ({ navigation, route }) => {
-    console.log("add kid===", route.params.recipeData.kid
+    console.log("add kid===", route.params.recipeData
     )
     const List = [
         { id: 1, day: 'Sunday' },
@@ -57,15 +57,16 @@ const AddToLunchBox = ({ navigation, route }) => {
             setDayString(DayInString)
             setDayData(day)
             if (msg !== [] && index === msg.length - 1) {
-                let parentId = route.params.recipeData.id
-                ApiHandler.addLunchBox(parentId, DayInString).then((response) => {
+                let recipeId = route.params.recipeData.id
+                let parentId=route.params.recipeData.parentId
+                ApiHandler.addLunchBox(recipeId,parentId, DayInString).then((response) => {
                     if (response.id) {
                         ApiHandler.getLunchBox(parentId).then((response) => {
                             if (response) {
                                 console.log("updateDay===", response)
                                 navigation.navigate('TabNavigators', {
                                     screen: 'LunchBox',
-                                    params: { message: msg, flag: true, parentId: route.params.recipeData.id, recipeImage: route.params.recipeData.ingridientsImage, ingridientsName: route.params.recipeData.ingridientsName, day: response.day.day,kid:route?.params?.recipeData?.kid }
+                                    params: { message: msg, flag: true, parentId: parentId, recipeImage: route.params.recipeData.ingridientsImage, ingridientsName: route.params.recipeData.ingridientsName, day: response.day.day,kid:route?.params?.recipeData?.kid,id:response.id }
                                 })
                             } else {
                                 Alert.alert('please select Day')
@@ -83,11 +84,11 @@ const AddToLunchBox = ({ navigation, route }) => {
                 onUserPress={() => navigation.navigate('ProfileScreen')}
             />
             <View style={{ flex: 1 / 5, justifyContent: 'center', alignItems: 'center' }}>
-                <Text style={{ fontSize: 20, fontWeight: '700' }}>Add to LunchBox</Text>
+                <Text style={{ fontSize: 30, fontWeight: '700' }}>Add to LunchBox</Text>
                 <Text style={{ marginTop: 10 }}>Select the day of the week to assign this recipe to</Text>
             </View>
             <View style={{ flex: 4 / 5, justifyContent: 'center', alignItems: 'center' }}>
-                <View style={{ flex: 1 / 1.4, backgroundColor: 'white', width: '90%' }}>
+                <View style={{ flex: 1 / 1.1, backgroundColor: 'white', width: '90%',borderRadius:20 }}>
                     <FlatList
                         data={days}
                         keyExtractor={(item) => item.id}
@@ -95,7 +96,7 @@ const AddToLunchBox = ({ navigation, route }) => {
                             return (
                                 <TouchableOpacity
                                     onPress={() => handlePress(item.day, index)}
-                                    style={{ width: '100%', backgroundColor: '#F6F3E7', marginTop: 5, height: 56, justifyContent: 'space-between', flexDirection: 'row', paddingHorizontal: 20, alignItems: 'center' }}>
+                                    style={{ width: '100%', backgroundColor: '#F6F3E7', marginTop: 2, height: 56, justifyContent: 'space-between', flexDirection: 'row', paddingHorizontal: 20, alignItems: 'center',borderTopLeftRadius:index==0 ?20:0,borderTopRightRadius:index===0 ?20:0 ,borderBottomLeftRadius:index==6 ? 20:0,borderBottomRightRadius:index==6 ? 20:0}}>
                                     <Text style={{}}>{item.day}</Text>
                                     <AntDesign size={20} color="black" name={arrData[index] ? "checksquare" : 'checksquareo'} />
                                 </TouchableOpacity>
@@ -120,7 +121,7 @@ const AddToLunchBox = ({ navigation, route }) => {
 const styles = StyleSheet.create({
     lunchBoxContainer: {
         flex: 1,
-        //backgroundColor: 'red'
+        backgroundColor: 'white'
     }
 
 })

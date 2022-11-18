@@ -108,13 +108,13 @@ const LoginScreen = ({ navigation }) => {
                     />
                 </View>
                 <View style={[loginStyle.textInputView,{borderTopLeftRadius:20,borderTopRightRadius:20,backgroundColor:'white'}]}>
-                    <Text style={{fontSize:20,margin:10,color:'#FFAB00'}}>{singUp ?"SingUp":"Login"}</Text>
+                    <Text style={{fontSize:20,margin:10,color:'#FFAB00'}}>{singUp ?"Sign Up":"Login"}</Text>
                     {
                         singUp &&
                         <View style={{ margin: 7 }}>
                             <Text style={{ margin: 3, fontWeight: '600' }}>NAME</Text>
                             <TextInputComponent
-                                placeholder={"User name"}
+                                placeholder={"Username"}
                                 inputStyle={[loginStyle.inputStyle, { borderWidth: 0.9, width: screenWidth / 1.04, borderColor: 'gray' }]}
                                 value={userName}
                                 onChangeText={(text) => setUserName(text)}
@@ -125,7 +125,7 @@ const LoginScreen = ({ navigation }) => {
                         <View style={{ margin: 7 }}>
                             <Text style={{ margin: 3, fontWeight: '600' }}>EMAIL</Text>
                             <TextInputComponent
-                                placeholder={"name@email.com"}
+                                placeholder={"username@email.com"}
                                 symbol="email"
                                 value={email}
                                 onChangeText={(text) => setEmail(text)}

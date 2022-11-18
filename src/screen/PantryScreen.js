@@ -113,7 +113,7 @@ const PantryScreen = ({ navigation,route }) => {
             <View style={{ flex: 1 / 10 }}>
                 <ButtonComponent
                     text={"Proceed"}
-                    buttonStyle={{ borderRadius: 20, bottom: 10 }}
+                    buttonStyle={{ borderRadius: 20, bottom: 220}}
                     onPress={() =>
                         getMatchUnmatch(selectedArray)
                     }

@@ -10,6 +10,7 @@ const screenWidth = Dimensions.get('window').width
 const RecipeDetails = ({ route, navigation }) => {
     const [data, setData] = useState([])
     const [selectedData, setSelectedData] = useState([])
+    console.log("parentId==",route?.params?.parentId)
 
     const matchIngredients = (item) => {
         let ingredient = route.params.selectedIngredients
@@ -51,13 +52,13 @@ const RecipeDetails = ({ route, navigation }) => {
                     source={{ uri: route.params.ingridientsImage }}
                     style={{ height: screenHeight / 3, width: screenWidth }}
                 />
-                <View style={{ height: screenHeight / 1.5, backgroundColor: 'white', borderTopRightRadius: 20, borderTopLeftRadius: 20, bottom: 20 }}>
+                <View style={{ height: screenHeight / 1.5, backgroundColor: 'white', borderTopRightRadius: 30, borderTopLeftRadius: 30, bottom: 20 }}>
                     <View style={{ alignSelf: 'center', alignItems: 'center', marginTop: 10 }}>
                         <Text style={{ fontSize: 20, fontWeight: '800' }}>{route.params.ingridientsName}</Text>
                         <Text>{route.params.time}</Text>
                     </View>
                     <View style={{ margin: 10 }}>
-                        <Text style={{ fontSize: 17 }}>Ingredients</Text>
+                        <Text style={{ fontSize: 20,margin:10,fontWeight:'500' }}>Ingredients</Text>
                         <FlatList
                             data={route.params.ingredients}
                             renderItem={({ item }) => {
@@ -68,7 +69,7 @@ const RecipeDetails = ({ route, navigation }) => {
                         />
                     </View>
                     <View style={{ margin: 10 }}>
-                        <Text style={{ fontSize: 17 }}>Instructions</Text>
+                        <Text style={{ fontSize: 20,margin:10,fontWeight:'500' }}>Instructions</Text>
                         <FlatList
                             data={route.params.steps}
                             renderItem={({ item }) => {

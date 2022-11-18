@@ -11,21 +11,21 @@ const screenHeight = Dimensions.get('window').height
 const screenWidth = Dimensions.get('window').width
 
 
-const RecipeComponent = ({ navigation, data, flag = '', selectedIngredients,kid }) => {
+const RecipeComponent = ({ navigation, data, flag = '', selectedIngredients,kid,parentId }) => {
     const renderItem = ({ item }) => {
         return (
             <TouchableOpacity
                 onPress={() =>
-                    navigation.navigate('RecipeDetails', { ingridientsImage: item.url, ingridientsName: item.title, time: item.time, ingredients: item.ingredients, steps: item.steps, flag: flag, selectedIngredients: selectedIngredients, id: item.id ,kid:kid})}
-                style={[pantryStyle.itemContainer, { backgroundColor: '#F6F3E7', height: screenHeight / 3, width: screenWidth / 2.2, margin: 5, borderRadius: 10 }]}>
+                    navigation.navigate('RecipeDetails', { parentId:parentId, ingridientsImage: item.url, ingridientsName: item.title, time: item.time, ingredients: item.ingredients, steps: item.steps, flag: flag, selectedIngredients: selectedIngredients, id: item.id ,kid:kid})}
+                style={[pantryStyle.itemContainer, { backgroundColor: '#F6F3E7', height: screenHeight /3, width: screenWidth / 2.2, margin: 5, borderRadius: 10,justifyContent:'space-between' }]}>
                 <ImageComponent
                     source={item.url}
-                    imageStyle={{ height: screenHeight / 4.5, width: "100%", borderTopRightRadius: 10, borderTopLeftRadius: 10 }}
+                    imageStyle={{ height: screenHeight / 4.1, width: "100%", borderTopRightRadius: 10, borderTopLeftRadius: 10 }}
                 />
-                <View style={{ alignSelf: 'flex-start', marginLeft: 10, top: 10 }}>
+                <View style={{ alignSelf: 'flex-start', marginLeft: 10, }}>
                     <Text>{item.title}</Text>
                     <Text>{item.prepTime}</Text>
-                    <Text>{item.ingredients.length+"/"+selectedIngredients.length}</Text>
+                    <Text>{item.ingredients.length+"/"+selectedIngredients.length +" ingredients"}</Text>
                 </View>
             </TouchableOpacity>
         )

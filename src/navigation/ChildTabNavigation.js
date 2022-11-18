@@ -8,18 +8,19 @@ import ShoppingListScreen from '../screen/ShoppingList';
 import RatingScreen from '../screen/RatingScreen';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import PantryScreen from '../screen/PantryScreen';
+import ChildLunchBox from '../screen/ChildLunchBox';
 
 
 const Tab = createBottomTabNavigator();
 const ChildTabNavigators = () => {
     return (
         <Tab.Navigator
-            initialRouteName='Home'
+            initialRouteName='ChildLunchBox'
             screenOptions={{ headerShown: false }}
         >
             <Tab.Screen
-                name="Home"
-                component={LunchBoxScreen}
+                name="ChildLunchBox"
+                component={ChildLunchBox}
                 options={{
                     tabBarIcon: ({ tintColor, focused }) => (
                         <AntDesign size={20} color="black" name="home" />

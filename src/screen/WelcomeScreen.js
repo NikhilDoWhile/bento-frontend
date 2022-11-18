@@ -19,7 +19,7 @@ const WelcomeScreen = ({ navigation, route }) => {
 
                         <ImageComponent
                             source={'https://img.freepik.com/free-photo/flat-lay-batch-cooking-composition_23-2148765597.jpg?w=2000'}
-                            imageStyle={{ width: screenWidth, height: screenHeight / 2, borderRadius: 20 }}
+                            imageStyle={{ width: screenWidth, height: screenHeight / 2.3, borderRadius: 20 }}
                         />
 
                         <View style={{ height: screenHeight / 2, justifyContent: 'space-evenly', alignItems: 'center' }}>

@@ -5,7 +5,7 @@ import Header from "../components/Header";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const PushNotification  = ({navigation})=>{
-    const [toggleData,setToggleData] = useState(false)
+    const [toggleData,setToggleData] = useState(true)
     const [togglePush,setTogglePush] = useState(false)
     const List =[
         {id:'1',data:'Push Notifications'},
@@ -21,6 +21,7 @@ const PushNotification  = ({navigation})=>{
         <SafeAreaView style={Styles.container}>
           <Header 
              onBackPress={()=>navigation.pop()}
+             
           />
            <View style={{flex:1}}> 
                <View style={{flex:1/10,justifyContent:'center',alignItems:'center'}}>
@@ -32,11 +33,32 @@ const PushNotification  = ({navigation})=>{
                     keyExtractor={(item)=>item.id}
                     renderItem={({item})=>{
                         return (
-                            <View style={{flexDirection:'row',justifyContent:'space-between',paddingHorizontal:20,alignItems:'center'}}>
-                                <Text style={{fontSize:18}}>{item.data}</Text>
-                                <MaterialCommunityIcons onPress={()=>item.data==="Push Notifications"?toggleButtonPushNotification():toggleButton()} style={{alignSelf:'flex-end'}} size={50} color="orange" name={toggleData ==true ?"toggle-switch-off":'toggle-switch'} />
-                            </View>
-                        )
+                          <View
+                            style={{
+                              flexDirection: "row",
+                              justifyContent: "space-between",
+                              paddingHorizontal: 20,
+                              alignItems: "center",
+                            }}
+                          >
+                            <Text style={{ fontSize: 18 }}>{item.data}</Text>
+                            <MaterialCommunityIcons
+                              onPress={() =>
+                                item.data === "Push Notifications"
+                                  ? toggleButtonPushNotification()
+                                  : toggleButton()
+                              }
+                              style={{ alignSelf: "flex-end" }}
+                              size={50}
+                              color={toggleData == true ? "grey" : "orange"}
+                              name={
+                                toggleData == true
+                                  ? "toggle-switch-off"
+                                  : "toggle-switch"
+                              }
+                            />
+                          </View>
+                        );
                     }}
                   />
                </View>

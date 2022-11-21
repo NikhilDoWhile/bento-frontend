@@ -24,7 +24,7 @@ const HomeScreen = ({ navigation, route }) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <Header logo onUserPress={()=>navigation.navigate('ProfileScreen')} />
+            <Header logo onUserPress={()=>navigation.navigate('ProfileScreen')} onNotiPress={()=>navigation.navigate('PushNotification')} />
             <View style={{ flex: 1 }}>
                 <View style={styles.homeScreenButton}>
                     <TouchableOpacity onPress={() => toggleDataMatche()} style={[styles.matchButton, { backgroundColor: toggleButton ? "#F6F3E7" : '#FC6474', borderTopLeftRadius: 10, borderBottomLeftRadius: 10 }]}>

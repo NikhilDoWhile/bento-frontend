@@ -5,8 +5,8 @@ export const pantryStyle = StyleSheet.create({
         flex: 1,
     },
     mainContainer: {
-        // flex: 9 / 10,
-        alignItems: 'center'
+        flex: 9 / 10,
+        alignItems: 'center',
     },
     itemContainer: {
         height: 90,
@@ -16,8 +16,8 @@ export const pantryStyle = StyleSheet.create({
         alignItems: 'center'
     },
     ingridientsView: {
-        height: 60,
-        width: 60,
+        height: 70,
+        width: 88,
     }
 
 })

@@ -23,7 +23,7 @@ const ChildLunchBox = ({ navigation, route }) => {
     const [msg, setMsg] = useState([]);
 
     useEffect(() => {
-        getAssignKid()
+        getAssignKid();
     }, [])
 
     const getAssignKid = () => {
@@ -133,17 +133,21 @@ const ChildLunchBox = ({ navigation, route }) => {
     }
 
     return (
-        <SafeAreaView style={Styles.container}>
-            <Header onBackPress={()=>navigation.pop()} />
-            <View style={{ flex: 1 }}>
-                <FlatList
-                    data={child}
-                    keyExtractor={(item) => item.id}
-                    renderItem={renderItem}
-                />
-            </View>
-        </SafeAreaView>
-    )
+      <SafeAreaView style={Styles.container}>
+        <Header
+          onBackPress={() => navigation.pop()}
+          onNotiPress={() => navigation.navigate("PushNotification")}
+          onUserPress={() => navigation.navigate("ProfileScreen")}
+        />
+        <View style={{ flex: 1 }}>
+          <FlatList
+            data={child}
+            keyExtractor={(item) => item.id}
+            renderItem={renderItem}
+          />
+        </View>
+      </SafeAreaView>
+    );
 }
 
 const Styles = StyleSheet.create({

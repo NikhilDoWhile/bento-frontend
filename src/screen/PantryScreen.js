@@ -24,7 +24,16 @@ const PantryScreen = ({ navigation, route }) => {
   const [arrData, setArrData] = useState([]);
   const [dayArray, setDayArray] = useState([]);
   const [msg, setMsg] = useState([]);
-  const [selectedArray, setSelectedArray] = useState([]);
+  const [selectedArray, setSelectedArray] = useState(["Pasta",
+  "Broccoli",
+  "Oil",
+  "Onion",
+  "Garlic",
+  "Ham",
+  "Double Cream",
+  "Mustard",
+  "Cheese"]);
+  const [value,setValue] = useState('')
   // console.log("parentId==",route?.params?.parentId)
 
   useEffect(() => {
@@ -75,27 +84,32 @@ const PantryScreen = ({ navigation, route }) => {
     return (
       <TouchableOpacity
         onPress={() => handlePress(item.title, index)}
-        style={[
-          pantryStyle.itemContainer,
-          {
-            borderWidth: selectedRecipe(item.title) ? 1 : 0,
-            borderColor: "skyblue",
-          },
-        ]}
+        style={[pantryStyle.itemContainer, {}]}
       >
         <View
-          style={[pantryStyle.ingridientsView, { backgroundColor: "#F6F3E7" }]}
+          style={{
+            borderWidth: selectedRecipe(item.title) ? 2 : 0,
+            borderColor: "skyblue",
+          }}
         >
-          <ImageComponent
-            source={item.url}
-            imageStyle={{ height: 50, width: 50, alignSelf: "center" }}
-          />
+          <View
+            style={[
+              pantryStyle.ingridientsView,
+              { backgroundColor: "#F6F3E7", padding: 6, width: 70 },
+            ]}
+          >
+            <ImageComponent
+              source={item.url}
+              imageStyle={{ height: 50, width: 50, alignSelf: "center" }}
+            />
+          </View>
+          <Text style={{ fontSize: 16, fontWeight: "500", alignSelf:'center' }}>{item.title}</Text>
         </View>
-        <Text>{item.title}</Text>
       </TouchableOpacity>
     );
   };
   const searchFilter = (text) => {
+    setValue(text)
     if (text) {
       const newData = list.filter((item) => {
         const itemData = item.title
@@ -109,27 +123,31 @@ const PantryScreen = ({ navigation, route }) => {
       setFilterData(list);
     }
   };
+  const removeInput = ()=>{
+    searchFilter(value)
+   setValue('')
+  }
 
   return (
     <SafeAreaView style={[pantryStyle.container, { backgroundColor: "white" }]}>
-      {/* <Header
+      <Header
                 onUserPress={() => navigation.navigate('ProfileScreen')}
                 logo
                 onNotiPress={()=>navigation.navigate('PushNotification')}
-            /> */}
+            />
       <View style={[pantryStyle.mainContainer]}>
         <Text
           style={{
             marginTop: 15,
-            fontSize: 28,
             color: "#FFAB00",
+            fontSize: 28,
             fontWeight: "400",
             fontFamily: "Sniglet-regular",
           }}
         >
           {"Choose your ingredients"}
         </Text>
-        <View style={{marginHorizontal: 14}}>
+        <View style={{ marginHorizontal: 14 }}>
           <Text
             style={{
               marginTop: 10,
@@ -142,7 +160,7 @@ const PantryScreen = ({ navigation, route }) => {
           </Text>
         </View>
 
-        <SearchComponent onChangeText={(text) => searchFilter(text)} />
+        <SearchComponent value={value} onCrossPress={()=>removeInput()} onChangeText={(text) => searchFilter(text)} />
         <FlatList
           data={filterData}
           keyExtractor={(item) => item.id}
@@ -151,10 +169,17 @@ const PantryScreen = ({ navigation, route }) => {
           showsVerticalScrollIndicator={false}
         />
       </View>
-      <View style={{ flex: 1 / 10 }}>
+      <View style={{ flex: 1 / 10, alignItems: "center" }}>
         <ButtonComponent
           text={"Continue"}
-          buttonStyle={{ borderRadius: 20, bottom: 10,}}
+          textStyle={{ fontSize: 16, fontWeight: '400' }}
+          buttonStyle={{
+            borderRadius: 20,
+            bottom: 10,
+            width: 145,
+            marginTop: 20,
+            backgroundColor: selectedArray.length > 0 ? "#FFAB00" : "#D9D9D9",
+          }}
           onPress={() => getMatchUnmatch(selectedArray)}
         />
       </View>

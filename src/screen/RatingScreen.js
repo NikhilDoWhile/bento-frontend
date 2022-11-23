@@ -27,22 +27,60 @@ const RatingScreen = ({ navigation,route }) => {
     }
 
     const renderItem = ({ item }) => {
-        console.log("item=====",item)
+        console.log("item===== Rating ",item.rating)
         return (
-            <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', marginTop: 10,alignItems:'center' }}>
-                <Text style={{ fontSize: 14, }}>25/08/2022</Text>
-                <Text style={{ fontSize: 14, right: 10 }} >{item.kidName}</Text>
-                <Text style={{ fontSize: 14, right: 10 }}>cheese and pasta</Text>
-                <Image
-                        source={item.rating===3?require('../../assets/Vector-1.png'):item.rating===2?require('../../assets/Vector-2.png'):item.rating===1 ?require('../../assets/Vector.png'):require('../../assets/Vector-2.png')}
-                        style={{height:20,width:20}}
-                    />
-                {/* <Image
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-around",
+              alignItems: "center",
+              marginTop: 10,
+              alignItems: "center",
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 16,
+                fontFamily: "Outfit-regular",
+                fontWeight: "400",
+              }}
+            >
+              25/08/2022
+            </Text>
+            <Text
+              style={{
+                fontSize: 16,
+                fontFamily: "Outfit-regular",
+                fontWeight: "400",
+              }}
+            >
+              {item.kidName}
+            </Text>
+            <Text
+              style={{
+                fontSize: 16,
+                fontFamily: "Outfit-regular",
+                fontWeight: "400",
+              }}
+            >
+              cheese and pasta
+            </Text>
+            <Image
+              source={
+                item.rating === "2"
+                  ? require("../../assets/Vector-1.png")
+                  : item.rating === "1"
+                  ? require("../../assets/Vector-2.png")
+                  : require("../../assets/Vector.png")
+              }
+              style={{ height: 20, width: 20 }}
+            />
+            {/* <Image
                     source={{ uri: item.rate }}
                     style={{ height: 20, width: 20, right: 10 }}
                 /> */}
-            </View>
-        )
+          </View>
+        );
     }
 
     return (
@@ -51,14 +89,15 @@ const RatingScreen = ({ navigation,route }) => {
                 showHeaderTitle
                 logo
                 onUserPress={()=>navigation.navigate('ProfileScreen')}
+                onNotiPress={()=>navigation.navigate('PushNotification')}
             />
             <View style={{}}>
-                <Text style={{ fontSize: 25, fontWeight: 'bold', margin: 10 ,alignSelf:'center'}}>Rating</Text>
+                <Text style={{ fontSize: 24, marginLeft: 22, fontFamily:'Sniglet-regular', fontWeight:'400', margin: 10 ,alignSelf:'center'}}>Rating</Text>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', }}>
-                    <Text style={{ fontSize: 18, fontWeight: '800' }}>Date</Text>
-                    <Text style={{ fontSize: 18, fontWeight: '800' }} >Name</Text>
-                    <Text style={{ fontSize: 18, fontWeight: '800' }}>Recipe</Text>
-                    <Text style={{ fontSize: 18, fontWeight: '800' }} >Rating</Text>
+                    <Text style={{ fontSize: 18, fontFamily:'Outfit-regular', fontWeight:'400' }}>Date</Text>
+                    <Text style={{ fontSize: 18, fontFamily:'Outfit-regular', fontWeight:'400' }} >Name</Text>
+                    <Text style={{ fontSize: 18, fontFamily:'Outfit-regular', fontWeight:'400' }}>Recipe</Text>
+                    <Text style={{ fontSize: 18, fontFamily:'Outfit-regular', fontWeight:'400' }} >Rating</Text>
                 </View>
                 <View style={{height:1.2,width:'90%',backgroundColor:'#262626',alignSelf:'center',top:5,opacity:0.5}}/>
             </View>

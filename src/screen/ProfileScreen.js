@@ -6,14 +6,14 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const ProfileScreen  = ({navigation})=>{
     let data=[
-        {id:1,screen:'ProfileScreen'},
+        {id:1,screen:'Profile Screen'},
         {id:2,screen:'Manage Accounts'},
         {id:3,screen:'Change Password'},
         {id:4,screen:'Push Notification'}
     ]
     const [profileData,setProfileData] = useState(data)
     const navigateToprofileScreen =(profile)=>{
-         if(profile==='ProfileScreen') {
+         if(profile==='Profile Screen') {
             navigation.navigate('Profile')
          } else if(profile==='Manage Accounts') {
               navigation.navigate("ManageAccounts")
@@ -35,20 +35,31 @@ const ProfileScreen  = ({navigation})=>{
          )
     }
     return (
-        <SafeAreaView style={styles.container}>
-            <Header onBackPress={()=>navigation.pop()}/>
-             <View style={{flex:1,}}>
-                <View style={{height:30,width:'100%',justifyContent:'center',margin:20}}>
-                    <Text style={{fontSize:20}}>Profile</Text>
-                </View>
-                 <FlatList
-                    data={profileData}
-                    keyExtractor={(item)=>item.id}
-                    renderItem={renderItem}
-                 />
-             </View>
-        </SafeAreaView>
-    )
+      <SafeAreaView style={styles.container}>
+        <Header
+          onBackPress={() => navigation.pop()}
+          onNotiPress={() => navigation.navigate("PushNotification")}
+          onUserPress={() => navigation.navigate("ProfileScreen")}
+        />
+        <View style={{ flex: 1 }}>
+          <View
+            style={{
+              height: 30,
+              width: "100%",
+              justifyContent: "center",
+              margin: 20,
+            }}
+          >
+            <Text style={{ fontSize: 20 }}>Profile</Text>
+          </View>
+          <FlatList
+            data={profileData}
+            keyExtractor={(item) => item.id}
+            renderItem={renderItem}
+          />
+        </View>
+      </SafeAreaView>
+    );
 }
 const styles= StyleSheet.create({
     container:{

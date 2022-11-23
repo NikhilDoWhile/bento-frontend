@@ -11,6 +11,7 @@ import ApiHandler from '../api/ApiHandler'
 
 const ManageAccount = ({navigation})=>{
     const [data,setData] = useState([])
+    const [parentId,setParentId] = useState('')
      const List =[
         {id:1,name:"shivam",designation:'Parent',url:'https://media.istockphoto.com/id/1309328823/photo/headshot-portrait-of-smiling-male-employee-in-office.jpg?b=1&s=170667a&w=0&k=20&c=MRMqc79PuLmQfxJ99fTfGqHL07EDHqHLWg0Tb4rPXQc='},
         {id:2,name:"shivam",designation:'Parent',url:'https://media.istockphoto.com/id/1309328823/photo/headshot-portrait-of-smiling-male-employee-in-office.jpg?b=1&s=170667a&w=0&k=20&c=MRMqc79PuLmQfxJ99fTfGqHL07EDHqHLWg0Tb4rPXQc='},
@@ -23,19 +24,26 @@ const ManageAccount = ({navigation})=>{
     let newArray=[...data]
     Preferences.getItem('userDetail').then((response)=>{
         let  data= JSON.parse(response)
+         setParentId(data.parentId)
         newArray.push({name:data.name,designation:"Parent",url:'https://media.istockphoto.com/id/1309328823/photo/headshot-portrait-of-smiling-male-employee-in-office.jpg?b=1&s=170667a&w=0&k=20&c=MRMqc79PuLmQfxJ99fTfGqHL07EDHqHLWg0Tb4rPXQc='})
-        console.log("resp====",JSON.parse(response))
         ApiHandler.getKid(data.parentId).then((response)=>{
-            console.log("getKid===",response.kids)
+            console.log("getKid===",response)
             let kids=response.kids
              kids.map((element)=>{
-                newArray.push({name:element.name,designation:'Kid',url:'http://www.morchemist.com/images/child-care-inner.jpg'})
+                console.log("element===",element)
+                newArray.push({Name:element.Name,designation:'Kid',url:'http://www.morchemist.com/images/child-care-inner.jpg'})
              })
              setData(newArray)
         })
     })
    }
-    const renderItem = ({ item }) => {
+   const deleteKid = (kidName,index)=>{
+     ApiHandler.deleteKid(parentId,kidName).then ((response)=>{
+        console.log("response=========",response)
+     })
+   }
+    const renderItem = ({ item ,index}) => {
+        console.log("item===",item)
         return (
             <View style={{ width:screenWidth/1.1, height: 90,  marginTop: 10, alignSelf: 'center', borderRadius: 20 ,justifyContent:'space-between',flexDirection:'row',backgroundColor:'#F6F3E7'}}>
                 <View style={{width:screenWidth/2,flexDirection:'row',justifyContent:'flex-start',alignItems:'center',borderRadius: 20}}>
@@ -46,13 +54,13 @@ const ManageAccount = ({navigation})=>{
                          />
                      </View>
                      <View style={{marginLeft:20}}>
-                        <Text>{item.name}</Text>
+                        <Text>{item.Name}</Text>
                         <Text>{item.designation}</Text>
                      </View>
                 </View>
                 <View style={{width:screenWidth/2.5,height:90,flexDirection:'row',justifyContent:'flex-end',borderRadius: 20}}>
                 <Ionicons style={{alignSelf:'flex-end',marginRight:20,bottom:30}} size={20} color="black" name="pencil" />
-                <AntDesign style={{alignSelf:'flex-end',marginRight:20,bottom:30}} size={20} color="black" name="delete" />
+                <AntDesign onPress={()=>deleteKid(item.Name,index)} style={{alignSelf:'flex-end',marginRight:20,bottom:30}} size={20} color="black" name="delete" />
                 </View>
                 
             </View>
@@ -60,10 +68,11 @@ const ManageAccount = ({navigation})=>{
     }
     return (
         <SafeAreaView style={Styles.container}>
-            {/* {console.log("data===========",data)} */}
+            {console.log("data===========",data)}
             <Header
                onBackPress={()=>navigation.pop()}
                onUserPress={() => navigation.navigate('ProfileScreen')}
+               onNotiPress={()=>navigation.navigate('PushNotification')}
             />
             <View style={{flex:1,}}>
                 <View style={{flex:1/10,justifyContent:'center',alignItems:'center'}}>

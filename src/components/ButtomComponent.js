@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-nativ
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import ImageComponent from './ImageComponent';
 
-const ButtonComponent = ({ text, buttonStyle, textStyle, showLine, onPress, showArrow, showImage }) => {
+const ButtonComponent = ({ text, buttonStyle, textStyle, showLine, onPress, showArrow, showImage,google }) => {
     return (
         <TouchableOpacity onPress={onPress} style={[styles.container, buttonStyle]}>
             {
@@ -14,11 +14,14 @@ const ButtonComponent = ({ text, buttonStyle, textStyle, showLine, onPress, show
             }
             {
                 showImage ?
-                    <View style={{ height: 40, bottom: 6, justifyContent: 'center', alignItems: 'center' }}>
+                    <View style={{   justifyContent: 'space-between', alignItems: 'center',flexDirection:'row',bottom:10,width:'60%'}}>
                         <ImageComponent
                             source={'https://blog.hubspot.com/hubfs/image8-2.jpg'}
                             imageStyle={{ height: 20, width: 20, }}
                         />
+                         {
+                            google ? <Text style={{ fontSize: 16,left:10 }}>Continue with Google</Text> : null
+                        }
                     </View>
                     :
                     null

@@ -6,25 +6,46 @@ const screenWidth = Dimensions.get('window').width
 
 
 
-const TextInputComponent = ({ placeholder, onChangeText, value, inputStyle, keyboardType, maxLength, editable, symbol, icon, inputContainer ,secureTextEntry,eyeSymbol,onEyePress,showHidePassword}) => {
+const TextInputComponent = ({ placeholder, onChangeText, value, inputStyle, keyboardType, maxLength, editable, symbol, icon, inputContainer ,secureTextEntry,eyeSymbol,onEyePress,showHidePassword, capitalize}) => {
     return (
-        <View style={[styles.inputContainer, inputContainer]}>
-            {icon ? <MaterialIcons size={20} color="gray" name={symbol} /> : null}
-            <TextInput
-                style={[styles.input, inputStyle]}
-                onChangeText={onChangeText}
-                value={value}
-                placeholder={placeholder}
-                keyboardType={keyboardType}
-                maxLength={maxLength}
-                placeholderTextColor={'#999999'}
-                editable={editable}
-                autoCapitalize='none'
-                secureTextEntry={secureTextEntry}
-            />
-          {showHidePassword ?  <Entypo style={{marginRight:10}} onPress={onEyePress} size={20} color="gray" name={eyeSymbol} />:null}
-        </View>
-    )
+      <View
+        style={[
+          styles.inputContainer,
+          inputContainer,
+          { width: screenWidth / 1.2 },
+        ]}
+      >
+        {icon ? (
+          <MaterialIcons
+            style={{ marginLeft: 10 }}
+            size={20}
+            color="gray"
+            name={symbol}
+          />
+        ) : null}
+        <TextInput
+          style={[styles.input, inputStyle]}
+          onChangeText={onChangeText}
+          value={value}
+          placeholder={placeholder}
+          keyboardType={keyboardType}
+          maxLength={maxLength}
+          placeholderTextColor={"#7B8794"}
+          editable={editable}
+          autoCapitalize={capitalize ? capitalize : 'none'}
+          secureTextEntry={secureTextEntry}
+        />
+        {showHidePassword ? (
+          <Entypo
+            style={{ right: 10 }}
+            onPress={onEyePress}
+            size={20}
+            color="gray"
+            name={eyeSymbol}
+          />
+        ) : null}
+      </View>
+    );
 }
 const styles = StyleSheet.create({
     input: {

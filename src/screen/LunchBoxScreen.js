@@ -84,7 +84,7 @@ const LunchBoxScreen = ({ route, navigation }) => {
        console.log("day===",item.day)
         return (
             <TouchableOpacity onPress={() => modalPopUp(item.day)} style={{ width: '100%', height: screenHeight / 3.5, backgroundColor: 'white', marginTop: 10, justifyContent: 'space-evenly', }}>
-                <Text style={{ fontSize: 20, marginLeft: 22 }}>{item.day}</Text>
+                <Text style={{ fontSize: 24, marginLeft: 22, fontFamily:'Sniglet-regular', fontWeight:'400' }}>{item.day}</Text>
                 <View style={{ width: screenWidth / 1.14, height: screenHeight / 4.5, backgroundColor: '#F6F3E7', alignSelf: 'center', borderRadius: 10 }}>
                     <ImageBackground
                         source={{ uri: item.recipeImage }}
@@ -95,7 +95,7 @@ const LunchBoxScreen = ({ route, navigation }) => {
                         </TouchableOpacity>
                     </ImageBackground>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', flex: 2 / 8, alignItems: 'center', paddingHorizontal: 10 }}>
-                        <Text>{item.recipeName}</Text>
+                        <Text style={{ fontSize: 18, fontFamily:'Outfit-regular', fontWeight:'400' }}>{item.recipeName}</Text>
                         <View>
                         <Feather size={22} color="gray" name="user" />
                         </View>
@@ -152,6 +152,7 @@ const LunchBoxScreen = ({ route, navigation }) => {
                 showHeaderTitle
                 logo
                 onUserPress={()=>navigation.navigate('ProfileScreen')}
+                onNotiPress={()=>navigation.navigate('PushNotification')}
             />
             <View style={{flex:1/5,justifyContent:'center',alignItems:'center'}}>
                <Text style={{fontSize:23,fontWeight:'500'}}>Lunchbox</Text>

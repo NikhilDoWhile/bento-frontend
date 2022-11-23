@@ -44,10 +44,12 @@ const ForgotPassword = ({ navigation,route }) => {
     
     return (
         <SafeAreaView style={Styles.container}>
-            <Header onBackPress={() => navigation.pop()} />
+            <Header onBackPress={() => navigation.pop()} onNotiPress={()=>navigation.navigate('PushNotification')}                 onUserPress={() => navigation.navigate('ProfileScreen')}
+/>
             <View style={{ flex: 1,  }}>
                 <View style={{ flex: 1 / 2,  justifyContent: 'space-evenly' }}>
-                    <Text style={{ fontSize: 20, fontWeight: '800', alignSelf: 'center' }}>Forgot Password</Text>
+                    <Text style={{ fontSize: 20, alignSelf: 'center',fontWeight: "600",
+                        fontFamily: "Sniglet-regular" }}>Forgot Password</Text>
                     <View style={{height:"50%", justifyContent: 'space-evenly' }}>
                         <TextInputComponent
                             placeholder={"New Password"}
@@ -56,8 +58,8 @@ const ForgotPassword = ({ navigation,route }) => {
                             icon
                             inputContainer={loginStyle.inputViewStyle}
                             secureTextEntry={showPassword ? false : true}
-                            eyeSymbol={showPassword ? 'eye' : 'eye-with-line'}
-                            onEyePress={() => hideShowPassword()}
+                            // eyeSymbol={showPassword ? 'eye' : 'eye-with-line'}
+                            // onEyePress={() => hideShowPassword()}
                             showHidePassword
                             onChangeText={(text)=>setNewPassword(text)}
                             value={newPassword}
@@ -69,8 +71,8 @@ const ForgotPassword = ({ navigation,route }) => {
                             icon
                             inputContainer={loginStyle.inputViewStyle}
                             secureTextEntry={showPassword ? false : true}
-                            eyeSymbol={showPassword ? 'eye' : 'eye-with-line'}
-                            onEyePress={() => hideShowPassword()}
+                            // eyeSymbol={showPassword ? 'eye' : 'eye-with-line'}
+                            // onEyePress={() => hideShowPassword()}
                             showHidePassword
                             onChangeText={(text)=>setConformPassword(text)}
                             value={conformPassword}
@@ -79,6 +81,7 @@ const ForgotPassword = ({ navigation,route }) => {
                     <ButtonComponent 
                        text={"Done"}
                        onPress={()=>changePassword()}
+                       buttonStyle={{marginHorizontal: 35}}
                     />
                 </View>
             </View>

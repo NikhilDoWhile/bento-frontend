@@ -40,7 +40,7 @@ const Profile = ({navigation}) => {
      }
     return (
         <SafeAreaView style={styles.container}>
-            <Header onBackPress={()=>navigation.pop()} />
+            <Header onBackPress={()=>navigation.pop()} onNotiPress={()=>navigation.navigate('PushNotification')}/>
             <View style={{ flex: 1, justifyContent: 'space-between' ,backgroundColor:'white'}}>
                 <View style={{ height: 50, width: '100%', justifyContent: 'center', flexDirection: 'row', alignItems: 'center', paddingHorizontal: 20 }}>
                     <Text style={{ fontSize: 20 }}>Personal setting</Text>

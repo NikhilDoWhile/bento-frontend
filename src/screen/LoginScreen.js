@@ -33,6 +33,10 @@ const LoginScreen = ({ navigation }) => {
   const [fontsLoaded] = useFonts({
     "Sniglet-bold": require("../../assets/Fonts/Sniglet-ExtraBold.ttf"),
     "Sniglet-regular": require("../../assets/Fonts/Sniglet-Regular.ttf"),
+    "Outfit-bold": require("../../assets/Fonts/Outfit-Bold.ttf"),
+    "Outfit-regular": require("../../assets/Fonts/Outfit-Regular.ttf"),
+    "Mulish-bold": require("../../assets/Fonts/Mulish-Bold.ttf"),
+    "Mulish-regular": require("../../assets/Fonts/Mulish-Regular.ttf"),
   });
 
   useEffect(() => {
@@ -157,7 +161,7 @@ const LoginScreen = ({ navigation }) => {
                     margin: 10,
                     fontWeight: "600",
                     fontFamily: "Sniglet-regular",
-                    fontSize:16
+                    fontSize: 16,
                   }}
                 >
                   Email
@@ -188,7 +192,7 @@ const LoginScreen = ({ navigation }) => {
                     margin: 10,
                     fontWeight: "600",
                     fontFamily: "Sniglet-regular",
-                    fontSize:16
+                    fontSize: 16,
                   }}
                 >
                   Password
@@ -217,7 +221,7 @@ const LoginScreen = ({ navigation }) => {
                       margin: 10,
                       fontWeight: "600",
                       fontFamily: "Sniglet-regular",
-                      fontSize:16
+                      fontSize: 16,
                     }}
                   >
                     Confirm Password
@@ -251,8 +255,8 @@ const LoginScreen = ({ navigation }) => {
                       right: 20,
                       color: "#FFCC7E",
                       fontSize: 16,
-                      marginBottom:15,
-                      marginTop:10
+                      marginBottom: 15,
+                      marginTop: 10,
                     },
                   ]}
                 >
@@ -263,10 +267,10 @@ const LoginScreen = ({ navigation }) => {
                 buttonStyle={{
                   borderRadius: 30,
                   backgroundColor: "#FFAB00",
-                  width: "30%",
+                  width: 145,
                   alignSelf: "center",
                 }}
-                textStyle={{ fontWeight:'400', fontSize: 16, lineHeight: 20 }}
+                textStyle={{ fontWeight: "400", fontSize: 16, lineHeight: 20 }}
                 text={!singUp ? "Login" : "Sign up"}
                 onPress={() =>
                   !singUp
@@ -277,18 +281,29 @@ const LoginScreen = ({ navigation }) => {
               <View style={{ padding: 0 }}>
                 <Text style={[loginStyle.forgotPassword]}>{"or"}</Text>
               </View>
-              <View style={{ padding: 2 }}>
+              <View
+                style={{
+                  marginTop: 10,
+                  // padding: 2,
+                  backgroundColor: "#FFF",
+                  borderRadius: 30,
+                  borderColor: "#F2E1E3",
+                  borderWidth: 1,
+                  marginHorizontal:25
+                }}
+              >
                 <ButtonComponent
                   showImage
                   google
                   buttonStyle={{
                     backgroundColor: "white",
-                    borderWidth: 1,
-                    width: screenWidth / 1.3,
+                    // borderWidth: 1,
+                    //width: screenWidth / 1.3,
                     alignSelf: "center",
-                    borderRadius: 30,
-                    borderColor: "#F2E1E3",
-                    height: 60
+                    // borderRadius: 30,
+                    // borderColor: "#F2E1E3",
+                    // height: 60,
+                    // paddingHorizontal: 40
                   }}
                   // onPress={()=>onPressData}
                 />

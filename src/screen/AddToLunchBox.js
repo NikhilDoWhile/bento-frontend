@@ -82,10 +82,11 @@ const AddToLunchBox = ({ navigation, route }) => {
             <Header
                 onBackPress={() => navigation.pop()}
                 onUserPress={() => navigation.navigate('ProfileScreen')}
+                onNotiPress={()=>navigation.navigate('PushNotification')}
             />
             <View style={{ flex: 1 / 5, justifyContent: 'center', alignItems: 'center' }}>
-                <Text style={{ fontSize: 30, fontWeight: '700' }}>Add to LunchBox</Text>
-                <Text style={{ marginTop: 10 }}>Select the day of the week to assign this recipe to</Text>
+                <Text style={{ fontSize: 30, fontWeight: '400', fontFamily: "Sniglet-regular" }}>Add to LunchBox</Text>
+                <Text style={{ marginTop: 10,fontSize: 14, fontWeight: '600', fontFamily: "Mulish-regular" }}>Select the day of the week to assign this recipe to</Text>
             </View>
             <View style={{ flex: 4 / 5, justifyContent: 'center', alignItems: 'center' }}>
                 <View style={{ flex: 1 / 1.1, backgroundColor: 'white', width: '90%',borderRadius:20 }}>
@@ -97,7 +98,7 @@ const AddToLunchBox = ({ navigation, route }) => {
                                 <TouchableOpacity
                                     onPress={() => handlePress(item.day, index)}
                                     style={{ width: '100%', backgroundColor: '#F6F3E7', marginTop: 2, height: 56, justifyContent: 'space-between', flexDirection: 'row', paddingHorizontal: 20, alignItems: 'center',borderTopLeftRadius:index==0 ?20:0,borderTopRightRadius:index===0 ?20:0 ,borderBottomLeftRadius:index==6 ? 20:0,borderBottomRightRadius:index==6 ? 20:0}}>
-                                    <Text style={{}}>{item.day}</Text>
+                                    <Text style={{fontFamily:'Mulish-regular', fontWeight:'600', fontSize:16}}>{item.day}</Text>
                                     <AntDesign size={20} color="black" name={arrData[index] ? "checksquare" : 'checksquareo'} />
                                 </TouchableOpacity>
                             )
@@ -110,6 +111,7 @@ const AddToLunchBox = ({ navigation, route }) => {
                 <ButtonComponent
                     buttonStyle={{ width: 100, borderRadius: 20 }}
                     text={'Save'}
+                    textStyle={{fontFamily:'Outfit-regular', fontWeight:'400', fontSize:16}}
                     onPress={() => NavigateToLunchBoxScreen(msg)}
                 />
 

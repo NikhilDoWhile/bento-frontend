@@ -6,9 +6,16 @@ export const baseUrl = {
     getShoppingList :'http://3.217.133.189:8080/pantry/get-items/',
     addShoppingList :'http://3.217.133.189:8080/pantry/add-item/',
     removeShoppingList:'http://3.217.133.189:8080/pantry/delete-item/',
-    addLunchBox:'http://3.217.133.189:8080/lunchbox/add/6365eb55ed270a222d38e83b?',
+    addLunchBox:'http://3.217.133.189:8080/lunchbox/add/',
     getLunchBox:'http://3.217.133.189:8080/lunchbox/get/',
     addKid:'http://3.217.133.189:8080/user/kid/creation?',
     getKid:'http://3.217.133.189:8080/user/kid?',
-    forgotPassword:'http://3.217.133.189:8080/user/reset/password?'
+    forgotPassword:'http://3.217.133.189:8080/user/reset/password?',
+    assignKid:'http://3.217.133.189:8080/lunchbox/assign-kid-lunchbox/',
+    getAssignKid:'http://3.217.133.189:8080/lunchbox/get-assign-kid/',
+    addRating:'http://3.217.133.189:8080/rating/recipe/636cc5218bcff7669137eeb5?',
+    getRating:'http://3.217.133.189:8080/rating/get-rating/?',
+    updateProfile:'http://3.217.133.189:8080/user/update-profile/',
+    deleteKid:'http://3.217.133.189:8080/user/delete-kid-profile?',
+
 }

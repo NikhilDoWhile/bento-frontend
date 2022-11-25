@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Text, SafeAreaView } from 'react-native'
+import { StyleSheet, View, Text, SafeAreaView,LogBox } from 'react-native'
 import TextInputComponent from './src/components/TextInputComponent'
 import { StatusBar } from 'expo-status-bar'
 import LoginScreen from './src/screen/LoginScreen'
@@ -23,3 +23,4 @@ const styles = StyleSheet.create({
 
 })
 export default App
+LogBox.ignoreAllLogs();

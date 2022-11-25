@@ -1,5 +1,5 @@
 import { NavigationContainer } from "@react-navigation/native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -26,6 +26,18 @@ const RecipeComponent = ({
   kid,
   parentId,
 }) => {
+  const getNo = (item) => {
+    var matchedNo = [];
+
+    selectedIngredients.map((j) => {
+      if (item.includes(j)) {
+        matchedNo.push(j);
+      }
+    });
+    return matchedNo.length;
+  };
+
+
   const renderItem = ({ item }) => {
     return (
       <TouchableOpacity
@@ -101,8 +113,8 @@ const RecipeComponent = ({
                 fontFamily: "Outfit-regular",
               }}
             >
-              {selectedIngredients.length +
-                " Out of " +
+              {getNo(item.ingredients) +
+                "/" +
                 item.ingredients.length +
                 " ingredients"}
             </Text>

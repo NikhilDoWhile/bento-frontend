@@ -12,10 +12,6 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import ApiHandler from '../api/ApiHandler'
 
 const LunchBoxScreen = ({ route, navigation }) => {
-    // const list = [
-    //     { id: 1, name: 'bella', checked: 'false' },
-    //     { id: 2, name: 'jenna', clecked: 'false' }
-    // ]
     const [data, setData] = useState(route?.params?.day)
     const [flag, setFlag] = useState(false)
     const [modalVisible, setModalVisible] = useState(false);
@@ -61,13 +57,12 @@ const LunchBoxScreen = ({ route, navigation }) => {
         setnameData(newValue)
     }
     const removeData = (id) => {
-        console.log("id")
+        console.log("id",id)
         // let newArray = [...data]
         // newArray.splice(id, 1)
         // setData(newArray)
     }
     const assignKid = (day)=>{
-
         console.log("name===",kidAssign,day)
         let kidName=kidAssign.toString();
         let lunchBoxId=route?.params?.id
@@ -90,7 +85,7 @@ const LunchBoxScreen = ({ route, navigation }) => {
                         source={{ uri: item.recipeImage }}
                         style={{ flex: 7 / 8, borderTopLeftRadius: 10, borderTopRightRadius: 10 }}
                     >
-                        <TouchableOpacity onPress={() => removeData(index)} style={{ backgroundColor: 'transparent', width: 25, alignSelf: 'flex-end', justifyContent: 'center', alignItems: 'center',borderRadius:30,right:10,top:10,borderColor:'black',borderWidth:1,height:25 }}>
+                        <TouchableOpacity onPress={() => removeData(item)} style={{ backgroundColor: 'transparent', width: 25, alignSelf: 'flex-end', justifyContent: 'center', alignItems: 'center',borderRadius:30,right:10,top:10,borderColor:'black',borderWidth:1,height:25 }}>
                             <Entypo size={20} color="black" name="cross" />
                         </TouchableOpacity>
                     </ImageBackground>
@@ -155,7 +150,7 @@ const LunchBoxScreen = ({ route, navigation }) => {
                 onNotiPress={()=>navigation.navigate('PushNotification')}
             />
             <View style={{flex:1/5,justifyContent:'center',alignItems:'center'}}>
-               <Text style={{fontSize:23,fontWeight:'500'}}>Lunchbox</Text>
+               <Text style={{fontSize:24,fontWeight:'400',fontFamily:'Sniglet-regular'}}>Lunchbox</Text>
             </View>
             {
                 flag ?
@@ -169,7 +164,14 @@ const LunchBoxScreen = ({ route, navigation }) => {
                     :
                     <LunchBoxComponent
                         content={'Find a Recipe and assign to a lunch box for it to appear here'}
-                        onRecipePress={() => navigation.navigate('Home')}
+                        onRecipePress={() => navigation.navigate('Home')
+                    // {
+                    //     navigation.navigate("TabNavigators", {
+                    //         screen: "ShoppingList",
+                    //       })
+                    // }
+                    }
+                        
                     />
             }
         </SafeAreaView>

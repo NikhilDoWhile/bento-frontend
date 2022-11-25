@@ -18,7 +18,6 @@ const screenWidth = Dimensions.get("window").width;
 
 const HomeScreen = ({ navigation, route }) => {
   const [toggleButton, setToggleButton] = useState(false);
-  console.log("route kid===", route.params);
 
   const toggleDataMatche = () => {
     setToggleButton(false);
@@ -34,6 +33,7 @@ const HomeScreen = ({ navigation, route }) => {
         logo
         onUserPress={() => navigation.navigate("ProfileScreen")}
         onNotiPress={() => navigation.navigate("PushNotification")}
+        onLogoPress={() => navigation.pop()}
       />
       <View style={{ flex: 1 }}>
         <View style={styles.homeScreenButton}>

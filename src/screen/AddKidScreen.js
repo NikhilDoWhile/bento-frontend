@@ -26,22 +26,46 @@ const AddKidScreen = ({ route, navigation }) => {
     var order = [];
     kidList.forEach((item, index) => {
       order.push(
-        <View style={{ marginHorizontal: 20, marginTop:15, }}>
-          <Text style={{ fontSize: 16, fontFamily: "Sniglet-regular",
-                  fontWeight: "400", marginTop: 5 }}>
+        <View style={{ marginHorizontal: 20, marginTop: 15 }}>
+          <Text
+            style={{
+              fontSize: 16,
+              fontFamily: "Sniglet-regular",
+              fontWeight: "400",
+              marginTop: 5,
+            }}
+          >
             Kid {index + 1}
           </Text>
-          <View style={{  borderWidth:1,
-        borderColor: '#F2E1E3',
-        borderRadius: 10,paddingHorizontal: 15, paddingBottom:10}}> 
-
-
-          <Text style={{ fontFamily: "Sniglet-regular",
-                  fontWeight: "400",fontSize: 14, marginTop: 5 }}>{item.name}</Text>
-          <Text style={{ fontFamily: "Sniglet-regular",
-                  fontWeight: "400",fontSize: 14, marginTop: 5 }}>
-            {item.age} year old
-          </Text>
+          <View
+            style={{
+              borderWidth: 1,
+              borderColor: "#F2E1E3",
+              borderRadius: 10,
+              paddingHorizontal: 15,
+              paddingBottom: 10,
+            }}
+          >
+            <Text
+              style={{
+                fontFamily: "Sniglet-regular",
+                fontWeight: "400",
+                fontSize: 14,
+                marginTop: 5,
+              }}
+            >
+              {item.name}
+            </Text>
+            <Text
+              style={{
+                fontFamily: "Sniglet-regular",
+                fontWeight: "400",
+                fontSize: 14,
+                marginTop: 5,
+              }}
+            >
+              {item.age} year old
+            </Text>
           </View>
 
           {/* <View
@@ -108,7 +132,7 @@ const AddKidScreen = ({ route, navigation }) => {
                     fontWeight: "400",
                   }}
                 >
-                  Kid 1
+                  Kid
                 </Text>
                 <Text
                   style={{
@@ -121,20 +145,19 @@ const AddKidScreen = ({ route, navigation }) => {
                   Name
                 </Text>
                 <TextInputComponent
-                capitalize={'words'}
+                  capitalize={"words"}
                   placeholder={"Add Kid"}
                   inputStyle={[
                     loginStyle.inputStyle,
                     {
-                        borderWidth:1,
-                        borderColor: '#F2E1E3',
-                        borderRadius: 10,
+                      borderWidth: 1,
+                      borderColor: "#F2E1E3",
+                      borderRadius: 10,
                       alignSelf: "center",
                     },
                   ]}
                   onChangeText={(text) => setName(text)}
                   value={name}
-                  
                 />
               </View>
               <View style={{ marginLeft: 15 }}>
@@ -144,12 +167,11 @@ const AddKidScreen = ({ route, navigation }) => {
                   inputStyle={[
                     loginStyle.inputStyle,
                     {
-                        borderWidth:1,
-                        borderColor: '#F2E1E3',
-                        borderRadius: 10,
+                      borderWidth: 1,
+                      borderColor: "#F2E1E3",
+                      borderRadius: 10,
                       marginLeft: 15,
-                      width:100
-                      
+                      width: 100,
                     },
                   ]}
                   onChangeText={(text) => setAge(text)}
@@ -186,7 +208,7 @@ const AddKidScreen = ({ route, navigation }) => {
 const Styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:'#fff'
+    backgroundColor: "#fff",
   },
 });
 export default AddKidScreen;

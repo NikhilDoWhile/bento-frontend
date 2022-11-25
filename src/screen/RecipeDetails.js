@@ -83,7 +83,7 @@ const RecipeDetails = ({ route, navigation }) => {
               style={{
                 fontSize: 14,
                 fontWeight: "400",
-                fontFamily: "Outfit-Regular",
+                fontFamily: "Outfit-regular",
                 lineHeight: 30,
               }}
             >
@@ -96,11 +96,11 @@ const RecipeDetails = ({ route, navigation }) => {
                 margin: 10,
                 fontSize: 18,
                 fontWeight: "400",
-                fontFamily: "Outfit-Regular",
+                fontFamily: "Outfit-regular",
                 lineHeight: 22,
               }}
             >
-              Ingredients
+              ingredients
             </Text>
             <FlatList
               data={route.params.ingredients}
@@ -112,7 +112,7 @@ const RecipeDetails = ({ route, navigation }) => {
                       marginLeft: 10,
                       color: matchIngredients(item) ? "black" : "red",
                       fontWeight: "400",
-                      fontFamily: "Outfit-Regular",
+                      fontFamily: "Outfit-regular",
                       lineHeight: 22,
                     }}
                   >
@@ -135,7 +135,7 @@ const RecipeDetails = ({ route, navigation }) => {
                       fontSize: 16,
                       marginLeft: 10,
                       fontWeight: "400",
-                      fontFamily: "Outfit-Regular",
+                      fontFamily: "Outfit-regular",
                       lineHeight: 22,
                     }}
                   >
@@ -155,7 +155,7 @@ const RecipeDetails = ({ route, navigation }) => {
             alignSelf: "center",
             fontSize: 16,
             fontWeight: "400",
-            fontFamily: "Outfit-Regular",
+            fontFamily: "Outfit-regular",
             lineHeight: 22,
           }}
           text={route.params.flag != "" ? "Add To Lunchbox" : "Add to list"}

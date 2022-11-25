@@ -120,6 +120,7 @@ const ShoppingListScreen = ({ navigation }) => {
         showHeaderTitle
         logo
         onNotiPress={() => navigation.navigate("PushNotification")}
+        onUserPress={() => navigation.navigate("ProfileScreen")}
       />
       <View style={{ flex: 1 }}>
         <View

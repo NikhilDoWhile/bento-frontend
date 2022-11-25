@@ -18,7 +18,6 @@ import Preferences from "../LocalStorage/Prefetences";
 import { loginStyle } from "../style/LoginStyle";
 const screenHeight = Dimensions.get("window").height;
 const screenWidth = Dimensions.get("window").width;
-import { useFonts } from "expo-font";
 
 const LoginScreen = ({ navigation }) => {
   const [singUp, setSingUp] = useState(false);
@@ -30,17 +29,12 @@ const LoginScreen = ({ navigation }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [fontLoded, setFontLoaded] = useState(false);
 
-  const [fontsLoaded] = useFonts({
-    "Sniglet-bold": require("../../assets/Fonts/Sniglet-ExtraBold.ttf"),
-    "Sniglet-regular": require("../../assets/Fonts/Sniglet-Regular.ttf"),
-    "Outfit-bold": require("../../assets/Fonts/Outfit-Bold.ttf"),
-    "Outfit-regular": require("../../assets/Fonts/Outfit-Regular.ttf"),
-    "Mulish-bold": require("../../assets/Fonts/Mulish-Bold.ttf"),
-    "Mulish-regular": require("../../assets/Fonts/Mulish-Regular.ttf"),
-  });
 
   useEffect(() => {
     //   initAsync()
+    setEmail("")
+    setPassword("")
+    setUserName("")
   }, []);
 
   const singUpData = () => {
@@ -130,6 +124,7 @@ const LoginScreen = ({ navigation }) => {
             <Image
               source={require("../../assets/bentoLogo-grn.png")}
               style={{ height: 50, width: screenWidth / 1.4 }}
+              resizeMode='cover'
             />
           </View>
           <View

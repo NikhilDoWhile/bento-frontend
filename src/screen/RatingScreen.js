@@ -27,7 +27,7 @@ const RatingScreen = ({ navigation,route }) => {
     }
 
     const renderItem = ({ item }) => {
-        console.log("item===== Rating ",item.rating)
+        console.log("item ===== Rating ",item) 
         return (
           <View
             style={{

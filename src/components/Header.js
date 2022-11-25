@@ -17,20 +17,24 @@ const Header = ({
   showHeaderTitle,
   onUserPress,
   onNotiPress,
+  onLogoPress,
 }) => {
   return (
     <View style={styles.container}>
       {logo ? (
-        <Image
-          source={require("../../assets/bentoLogo-grn.png")}
-          style={{ height: 18, width: 97 }}
-        />
+        <TouchableWithoutFeedback onPress={onLogoPress}>
+          <Image
+            source={require("../../assets/bentoLogo-grn.png")}
+            style={{ height: 18, width: 97 }}
+            resizeMode="contain"
+          />
+        </TouchableWithoutFeedback>
       ) : (
         <AntDesign
           onPress={onBackPress}
-          size={20}
-          color="gray"
-          name="arrowleft"
+          size={22}
+          color="#FFAB00"
+          name="left"
         />
       )}
       {showHeaderTitle ? (
@@ -42,7 +46,7 @@ const Header = ({
           flexDirection: "row",
           width: 50,
           justifyContent: "space-between",
-          marginRight: 7
+          marginRight: 7,
         }}
       >
         {/* <Feather onPress={onUserPress} size={22} color="gray" name="user" />

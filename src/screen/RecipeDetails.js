@@ -94,13 +94,13 @@ const RecipeDetails = ({ route, navigation }) => {
             <Text
               style={{
                 margin: 10,
-                fontSize: 18,
-                fontWeight: "400",
+                fontSize: 20,
+                fontWeight: "600",
                 fontFamily: "Outfit-regular",
-                lineHeight: 22,
+                lineHeight: 24,
               }}
             >
-              ingredients
+              Ingredients
             </Text>
             <FlatList
               data={route.params.ingredients}
@@ -123,7 +123,15 @@ const RecipeDetails = ({ route, navigation }) => {
             />
           </View>
           <View style={{ margin: 10 }}>
-            <Text style={{ fontSize: 20, margin: 10, fontWeight: "500" }}>
+            <Text
+              style={{
+                fontSize: 20,
+                margin: 10,
+                fontWeight: "600",
+                fontFamily: "Outfit-regular",
+                lineHeight: 22,
+              }}
+            >
               Instructions
             </Text>
             <FlatList

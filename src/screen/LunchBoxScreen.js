@@ -57,7 +57,7 @@ const LunchBoxScreen = ({ route, navigation }) => {
         setnameData(newValue)
     }
     const removeData = (id) => {
-        console.log("id",id)
+        console.log("id",id,route?.params)
         // let newArray = [...data]
         // newArray.splice(id, 1)
         // setData(newArray)

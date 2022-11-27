@@ -94,10 +94,10 @@ const RecipeDetails = ({ route, navigation }) => {
             <Text
               style={{
                 margin: 10,
-                fontSize: 20,
+                fontSize: 24,
                 fontWeight: "600",
                 fontFamily: "Outfit-regular",
-                lineHeight: 24,
+                lineHeight: 22,
               }}
             >
               Ingredients
@@ -125,7 +125,7 @@ const RecipeDetails = ({ route, navigation }) => {
           <View style={{ margin: 10 }}>
             <Text
               style={{
-                fontSize: 20,
+                fontSize: 24,
                 margin: 10,
                 fontWeight: "600",
                 fontFamily: "Outfit-regular",
@@ -155,7 +155,7 @@ const RecipeDetails = ({ route, navigation }) => {
           </View>
         </View>
       </ScrollView>
-      <View style={{ marginTop: 10 }}>
+      <View style={{ marginTop: 10, backgroundColor: '#F6F3E7' }}>
         <ButtonComponent
           buttonStyle={{
             width: 186,

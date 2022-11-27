@@ -124,7 +124,7 @@ const LoginScreen = ({ navigation }) => {
             <Image
               source={require("../../assets/bentoLogo-grn.png")}
               style={{ height: 50, width: screenWidth / 1.4 }}
-              resizeMode='cover'
+              resizeMode='contain'
             />
           </View>
           <View

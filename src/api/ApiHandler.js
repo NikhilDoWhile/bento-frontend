@@ -234,6 +234,7 @@ export default class ApiHandler {
         }
     }
     static deleteKid = async (parentId,kidName,) => {
+        console.log("deleteKid",baseUrl.deleteKid + `parentId=${parentId}&kidName=${kidName}`)
         try {
             const params = {
                 method: 'POST',

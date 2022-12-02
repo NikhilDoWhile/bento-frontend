@@ -8,17 +8,22 @@ const ChildComponent = ({
   isParent,
   kidSelected,
   parentSelected,
+  firstKid,
 }) => {
+  const parent = require("../../assets/Parent.png");
+  const Kid1   = require("../../assets/kid1.png");
+  const Kid2   = require("../../assets/Ellipse68.png");
+
   return (
     <View style={{ width: 120, alignItems: "center" }}>
       <TouchableOpacity onPress={onPress} style={{}}>
         <Image
-          source={require("../../assets/Ellipse68.png")}
+          source={isParent ? parent : firstKid ? Kid1 : Kid2}
           style={{
             height: 100,
             width: 100,
             marginBottom: 10,
-            borderWidth: ( parentSelected || kidSelected ? 3 :0 ),
+            borderWidth: parentSelected || kidSelected ? 3 : 0,
             borderColor: "#FFAB00",
             borderRadius: 50,
           }}

@@ -34,7 +34,7 @@ const RatingScreen = ({ navigation,route }) => {
               flexDirection: "row",
               justifyContent: "space-around",
               alignItems: "center",
-              marginTop: 10,
+              marginTop: 20,
               alignItems: "center",
             }}
           >
@@ -45,7 +45,7 @@ const RatingScreen = ({ navigation,route }) => {
                 fontWeight: "400",
               }}
             >
-              25/08/2022
+              {item.createdAt}
             </Text>
             <Text
               style={{
@@ -63,7 +63,9 @@ const RatingScreen = ({ navigation,route }) => {
                 fontWeight: "400",
               }}
             >
-              cheese and pasta
+              {item.recipeName !== null || ""
+                ? item.recipeName
+                : "cheese and pasta"}
             </Text>
             <Image
               source={

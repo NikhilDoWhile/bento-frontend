@@ -32,6 +32,7 @@ const ChildLunchBox = ({ navigation, route }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [arrData, setArrData] = useState([]);
   const [msg, setMsg] = useState([]);
+  const [recipeId, setRecipeId] = useState('');
 
   useEffect(() => {
     getAssignKid();
@@ -42,6 +43,7 @@ const ChildLunchBox = ({ navigation, route }) => {
     ApiHandler.getAssignKid(parentId).then((response) => {
       console.log("get assign kid===", response);
       setChild(response?.days);
+      setRecipeId(response?.recipeId);
     });
   };
   const modalPopUp = () => {
@@ -69,12 +71,14 @@ const ChildLunchBox = ({ navigation, route }) => {
     };
     Preferences.setItem("key", JSON.stringify(data));
     rating.map((element, index) => {
-      console.log("shivam===", element, index + 1);
-      ApiHandler.addrating(parentId, index + 1, kidName).then((response) => {
-        console.log("resp=====", response);
-        setModalVisible(!modalVisible);
-        // navigation.navigate('Rating',{parentId:parentId,kidName:kidName})
-      });
+      console.log("shivam=== addrating",route?.params );
+      ApiHandler.addrating(recipeId, parentId, index + 1, kidName).then(
+        (response) => {
+          console.log("resp===== addrating", response);
+          setModalVisible(!modalVisible);
+          // navigation.navigate('Rating',{parentId:parentId,kidName:kidName})
+        }
+      );
     });
   };
 

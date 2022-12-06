@@ -13,7 +13,7 @@ export const baseUrl = {
     forgotPassword:'https://api.bentoapp.ca/backend/user/reset/password?',
     assignKid:'https://api.bentoapp.ca/backend/lunchbox/assign-kid-lunchbox/',
     getAssignKid:'https://api.bentoapp.ca/backend/lunchbox/get-assign-kid/',
-    addRating:'https://api.bentoapp.ca/backend/rating/recipe/636cc5218bcff7669137eeb5?',
+    addRating:'https://api.bentoapp.ca/backend/rating/recipe/',
     getRating:'https://api.bentoapp.ca/backend/rating/get-rating/?',
     updateProfile:'https://api.bentoapp.ca/backend/user/update-profile/',
     deleteKid:'https://api.bentoapp.ca/backend/user/delete-kid-profile?',

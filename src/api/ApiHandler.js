@@ -190,7 +190,7 @@ export default class ApiHandler {
             console.log("getKid==",e)
         }
     }
-    static addrating = async (parentId,rating,kidName) => {
+    static addrating = async (recipeId,parentId,rating,kidName) => {
         try {
             const params = {
                 method: 'POST',
@@ -199,7 +199,7 @@ export default class ApiHandler {
                     'Content-Type': 'application/json'
                 },
             }
-            const fetchResponse = await fetch(baseUrl.addRating + `parentId=${parentId}&rating=${rating}&kidName=${kidName}`, params);
+            const fetchResponse = await fetch(baseUrl.addRating + `${recipeId}?parentId=${parentId}&rating=${rating}&kidName=${kidName}`, params);
             const data=fetchResponse.json()
             return data;
         } catch (e) {
